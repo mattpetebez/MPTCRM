@@ -1,0 +1,35 @@
+{% load static %}
+<html>
+    <head>
+        <title>Sales Force</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'SalesPeople/style.css' %}">
+    </head>
+<link rel="stylesheet" type="text/css" href="{% static 'SalesPeople/style.css' %}" />
+    <body>
+        <div class="page-header">
+            <h1><a href="/SalesForce">Sales Force</a></h1>
+        </div>
+        {% if sales_person_list %}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="post">
+                        <h2>Sales People</h2>
+                        <ul>
+                            {% for person in sales_person_list %}
+                            <li><a href="/SalesPeople/{{ person.first_name }}/">{{ person.first_name }}</a> </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+             <p> No Sales people to display </p>
+        {% endif %}
+        <a href="/logout">logout</a>
+    </body>
