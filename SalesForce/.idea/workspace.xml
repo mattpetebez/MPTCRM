@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0581f4f2-da43-419c-aa78-d6380f574576" name="Default" comment="Added buttons to SalesPersonDetail for adding meetings and sales.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesForce/templates" afterPath="$PROJECT_DIR$/SalesForce/templates" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/SalesForce.iml" afterPath="$PROJECT_DIR$/.idea/SalesForce.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="0581f4f2-da43-419c-aa78-d6380f574576" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/SalesPeople/Home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesForce/__init__.py" afterPath="$PROJECT_DIR$/SalesForce/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesForce/settings.py" afterPath="$PROJECT_DIR$/SalesForce/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesForce/urls.py" afterPath="$PROJECT_DIR$/SalesForce/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesForce/wsgi.py" afterPath="$PROJECT_DIR$/SalesForce/wsgi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/__init__.py" afterPath="$PROJECT_DIR$/SalesPeople/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/admin.py" afterPath="$PROJECT_DIR$/SalesPeople/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/apps.py" afterPath="$PROJECT_DIR$/SalesPeople/apps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/forms.py" afterPath="$PROJECT_DIR$/SalesPeople/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0002_auto_20170502_1442.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0002_auto_20170502_1442.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0003_auto_20170502_1450.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0003_auto_20170502_1450.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0004_salesperson_email_address.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0004_salesperson_email_address.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0005_auto_20170502_1500.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0005_auto_20170502_1500.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0006_salesperson_email_address.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0006_salesperson_email_address.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/0007_auto_20170502_1541.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/0007_auto_20170502_1541.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/migrations/__init__.py" afterPath="$PROJECT_DIR$/SalesPeople/migrations/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/models.py" afterPath="$PROJECT_DIR$/SalesPeople/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css" afterPath="$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/tests.py" afterPath="$PROJECT_DIR$/SalesPeople/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/urls.py" afterPath="$PROJECT_DIR$/SalesPeople/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/views.py" afterPath="$PROJECT_DIR$/SalesPeople/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/widgets.py" afterPath="$PROJECT_DIR$/SalesPeople/widgets.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/AddSale.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/AddSale.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/index.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/template.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registration/login.html" afterPath="$PROJECT_DIR$/templates/registration/login.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,8 +30,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SalesPeople/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            <state relative-caret-position="80">
+              <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -70,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SalesForce/urls.py">
+      <file leaf-file-name="apps.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SalesPeople/apps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+            <state relative-caret-position="100">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,28 +52,18 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/SalesPeople/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+            <state relative-caret-position="340">
+              <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SalesForce/settings.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SalesPeople/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SalesPeople/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="19" column="40" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+            <state relative-caret-position="220">
+              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -112,21 +71,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SalesForce/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SalespersonDetail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/SalesPeople/Home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SalesForce/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="22" column="57" lean-forward="true" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+              <folding>
+                <element signature="e#644#685#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalespersonDetail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,8 +116,8 @@
       <file leaf-file-name="AddSale.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/SalesPeople/AddSale.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,18 +126,8 @@
       <file leaf-file-name="AddMeeting.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="31" column="68" lean-forward="true" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -188,19 +159,19 @@
         <option value="$PROJECT_DIR$/SalesForce/registration/login.html" />
         <option value="$PROJECT_DIR$/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/templates/SalesPeople/AddSale.html" />
-        <option value="$PROJECT_DIR$/SalesPeople/urls.py" />
-        <option value="$PROJECT_DIR$/SalesPeople/views.py" />
         <option value="$PROJECT_DIR$/templates/SalesPeople/template.html" />
         <option value="$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html" />
         <option value="$PROJECT_DIR$/SalesPeople/widgets.py" />
         <option value="$PROJECT_DIR$/SalesPeople/forms.py" />
-        <option value="$PROJECT_DIR$/SalesForce/urls.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/SalesPeople/index.html" />
-        <option value="$PROJECT_DIR$/SalesForce/settings.py" />
         <option value="$PROJECT_DIR$/SalesPeople/models.py" />
         <option value="$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css" />
         <option value="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" />
+        <option value="$PROJECT_DIR$/SalesPeople/urls.py" />
+        <option value="$PROJECT_DIR$/SalesForce/urls.py" />
+        <option value="$PROJECT_DIR$/SalesPeople/views.py" />
+        <option value="$PROJECT_DIR$/SalesForce/settings.py" />
       </list>
     </option>
   </component>
@@ -272,6 +243,34 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="SalesPeople">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SalesForce">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SalesPeople">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SalesForce">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SalesForce">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -669,6 +668,14 @@
       <option name="presentableId" value="Default" />
       <updated>1492086370061</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added buttons to SalesPersonDetail for adding meetings and sales.">
+      <created>1498122063826</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1498122063826</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -689,7 +696,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39979655" sideWeight="0.49595687" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39959225" sideWeight="0.49595687" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -709,7 +716,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Added buttons to SalesPersonDetail for adding meetings and sales." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added buttons to SalesPersonDetail for adding meetings and sales." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -718,14 +726,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SalesPeople/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -944,14 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SalesPeople/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SalesPeople/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -994,13 +986,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SalesPeople/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="73" column="38" lean-forward="false" selection-start-line="73" selection-start-column="38" selection-end-line="73" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SalesPeople/widgets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -1021,46 +1006,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SalesForce/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/registration/base.html" />
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/SalesPeople/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SalesForce/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SalesPeople/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,26 +1033,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/SalesPeople/AddSale.html">
+    <entry file="file://$PROJECT_DIR$/SalesPeople/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+        <state relative-caret-position="100">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SalesPeople/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="31" column="68" lean-forward="true" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SalesForce/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="22" column="57" lean-forward="true" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+          <folding>
+            <element signature="e#644#685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/SalesPeople/Home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/SalesPeople/AddSale.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/SalesPeople/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SalesPeople/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SalesForce/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
           <folding />
         </state>
       </provider>

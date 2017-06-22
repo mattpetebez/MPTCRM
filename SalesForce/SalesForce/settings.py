@@ -25,7 +25,7 @@ SECRET_KEY = '-b5c3qlmwic1v_$8+hhnuf$1(xu#76w&&!6vjnt=ocpf)q7hm2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['172.31.60.10']
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SalesForce',
         'USER': 'root',
-        'PASSWORD': '2',
+        'PASSWORD': 'Pass!@#$word',
     }
 }
 

@@ -7,16 +7,17 @@ from .models import SalesPerson, Sale, Company, CompanyRepresentative, Meeting
 from .forms import AddSaleForm, AddMeetingForm
 from django.utils import timezone
 from django.contrib import messages
-
-
+from django.shortcuts import redirect
 # Create your views here.
+
+
 def index(request):
     if request.user.is_authenticated():
         sales_person_list = User.objects.order_by()
         context = {'sales_person_list': sales_person_list}
         return render(request, 'SalesPeople/index.html', context)
     else:
-        return HttpResponse("Need to be logged in to do that")
+        return redirect('login')
 
 
 def get_sales_person(request, first_name):
