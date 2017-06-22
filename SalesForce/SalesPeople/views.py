@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
 from .models import SalesPerson, Sale, Company, CompanyRepresentative, Meeting
-from .forms import AddSaleForm, AddMeetingForm
+from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -76,5 +76,25 @@ def add_meeting(request, first_name):
             if request.user.first_name == first_name:
                 form = AddMeetingForm()
                 return render(request, 'SalesPeople/AddMeeting.html', {'form': form})
+            else:
+                return HttpResponse("%s, you cannot add a meeting for %s" % (request.user.first_name, first_name))
+
+
+def add_company(request, first_name):
+    if request.method == "POST":
+        form = AddCompanyForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.sales_representative = request.user
+            post.save()
+            return HttpResponse("Company successfully saved.")
+        else:
+            messages.error(request, "Error")
+            return render(request, 'SalesPeople/template.html', {'form': form})
+    else:
+        if request.user.is_authenticated:
+            if request.user.first_name == first_name:
+                form = AddCompanyForm()
+                return render(request, 'SalesPeople/AddCompany.html', {'form': form})
             else:
                 return HttpResponse("%s, you cannot add a meeting for %s" % (request.user.first_name, first_name))
