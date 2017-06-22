@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0581f4f2-da43-419c-aa78-d6380f574576" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/SalesPeople/AddCompany.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/SalesPeople/Home.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/forms.py" afterPath="$PROJECT_DIR$/SalesPeople/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/urls.py" afterPath="$PROJECT_DIR$/SalesPeople/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/views.py" afterPath="$PROJECT_DIR$/SalesPeople/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -678,7 +672,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498133779360</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Company add for user: Users can now add companies to the database.">
+      <created>1498136684860</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1498136684860</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -721,7 +722,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added buttons to SalesPersonDetail for adding meetings and sales." />
     <MESSAGE value="Added correct redirects: homepage redirects you to login if not logged in." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added correct redirects: homepage redirects you to login if not logged in." />
+    <MESSAGE value="Added Company add for user: Users can now add companies to the database." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Company add for user: Users can now add companies to the database." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
