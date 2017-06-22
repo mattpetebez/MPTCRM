@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SalesForce',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '2',
     }
 }
 

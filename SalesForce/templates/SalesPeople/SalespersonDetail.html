@@ -30,5 +30,11 @@
             <li>Number of sales still pending: {{ sales_person_in_question.pending_sales_count }}</li>
         </ul>
     {% endif %}
+    <form method="get" action= "/SalesPeople/{{ sales_person_in_question.first_name }}/AddSale">
+        <button type="submit">Add Sale</button>
+    </form>
+    <form method="get" action= "/SalesPeople/{{ sales_person_in_question.first_name }}/AddMeeting">
+        <button type="submit">Add Meeting</button>
+    </form>
 {% endif %}
 
