@@ -19,6 +19,13 @@ class SalesPerson(models.Model):
     def __str__(self):
         return str(self.user.first_name)
 
+    def clear_counters(self):
+        self.total_sales_amount = 0
+        self.total_sales_count = 0
+        self.pending_sales_amount = 0
+        self.pending_sales_count = 0
+        self.save()
+
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
@@ -44,7 +51,7 @@ class Company(models.Model):
     company_name = models.CharField(max_length=30)
     contact_number = models.CharField(max_length=10)
     company_representative = models.ForeignKey(CompanyRepresentative, null=True, blank=True)
-    sales_representative = models.ForeignKey(User, null=True, blank=True)
+    sales_representative = models.ManyToManyField(User)
     address = models.CharField(max_length=20)
 
     def __str__(self):
@@ -73,7 +80,7 @@ class Meeting(models.Model):
 #
 #     def __str__(self):
 #         return self.product_name
-#
+
 
 class Sale(models.Model):
     amount = models.FloatField(default=0)
@@ -84,8 +91,33 @@ class Sale(models.Model):
     sales_people = models.ManyToManyField(User, blank=True)
     company_rep = models.ForeignKey(CompanyRepresentative, blank=True, null=True)
     company = models.ForeignKey(Company, null=True, blank=True)
+    unique_id = models.CharField(blank=True, null=True, max_length=20)
 
     def __str__(self):
         company_name = (Company.objects.get(id=self.company_id)).company_name
-        return "%s: R%0.2f" % (company_name, self.amount)
+        if not self.unique_id:
+            return "%s: R%0.2f" % (company_name, self.amount)
+        else:
+            return "%s: %s" % (company_name, self.unique_id)
+
+    def sync_sale_add(self):
+        for user in self.sales_people.all():
+            if self.sale_completed:
+                user.salesperson.total_sales_amount += self.amount
+                user.salesperson.pending_sales_amount -= self.amount
+                user.salesperson.total_sales_count += 1
+                user.salesperson.pending_sales_count -=1
+                user.salesperson.save()
+            else:
+                user.salesperson.pending_sales_amount += self.amount
+                user.salesperson.pending_sales_count += 1
+                user.salesperson.save()
+
+
+
+
+
+
+
+
 

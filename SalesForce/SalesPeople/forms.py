@@ -23,6 +23,8 @@ class AddCompanyForm(forms.ModelForm):
         model = Company
         exclude = ['sales_representative']
 
-# class AddCompanyRepresentativeForm(forms.ModelForm):
-#     class Meta:
-#         model = CompanyRepresentative
+
+class AddCompanyRepresentativeForm(forms.ModelForm):
+    class Meta:
+        model = CompanyRepresentative
+        fields = ['first_name', 'last_name', 'contact_number']

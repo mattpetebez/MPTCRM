@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
 from .models import SalesPerson, Sale, Company, CompanyRepresentative, Meeting
-from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm
+from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -23,11 +23,10 @@ def index(request):
 def get_sales_person(request, first_name):
     if request.user.first_name == first_name:
         try:
-            sales_person_in_question = User.objects.get(first_name=first_name)
+            sales_person_in_question = request.user.salesperson
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
-        # sales_person_in_question.calculate_totals()
-        sales_person_sales = sales_person_in_question.sale_set.all()
+        sales_person_sales = request.user.sale_set.all()
         context = {'sales_person_in_question': sales_person_in_question, 'sales_person_sales': sales_person_sales}
         return render(request, 'SalesPeople/SalespersonDetail.html', context)
     else:
@@ -47,7 +46,11 @@ def add_sale(request, first_name):
             post.date_acquired = timezone.now().date()
             post.save()
             post.sales_people.add(request.user)
-            return HttpResponse("Post successfully saved.")
+            post.sync_sale_add()
+            user = request.user
+            success_type = "Sale"
+            context = {'user':user, 'success_type':success_type}
+            return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
     else:
         if request.user.is_authenticated:
             if request.user.first_name == first_name:
@@ -85,7 +88,7 @@ def add_company(request, first_name):
         form = AddCompanyForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.sales_representative = request.user
+            post.sales_representative.add(request.user)
             post.save()
             return HttpResponse("Company successfully saved.")
         else:
@@ -98,3 +101,20 @@ def add_company(request, first_name):
                 return render(request, 'SalesPeople/AddCompany.html', {'form': form})
             else:
                 return HttpResponse("%s, you cannot add a meeting for %s" % (request.user.first_name, first_name))
+
+
+def add_company_representative(request, first_name):
+    if request.method == "POST":
+        form = AddCompanyRepresentativeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return HttpResponse("Company Representative %s %s added successfully" % (post.first_name, post.last_name))
+    else:
+        if request.user.is_authenticated:
+            form = AddCompanyRepresentativeForm()
+            return render(request, 'SalesPeople/AddCompanyRepresentative.html', {'form': form})
+        else:
+            return HttpResponse("Need to be logged in to do that")
+
+
