@@ -26,11 +26,7 @@
     src="{% static 'admin/js/calendar.js' %}"></script>
 <script type="text/javascript"
     src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
-<h1>Add Company</h1>
-<p1>Please note: if the sales representative you wish to add is not in the database, select the link below:</p1>
-    <form method="get" action= "/SalesPeople/{{ sales_person_in_question.first_name }}/AddCompanyRepresentative">
-        <button type="submit">Add Company Representative</button>
-    </form>
+<h1>Add Company Representative</h1>
 <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>

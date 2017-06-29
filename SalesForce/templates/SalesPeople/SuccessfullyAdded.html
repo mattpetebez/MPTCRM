@@ -1,0 +1,13 @@
+<html>
+    <body>
+    {% if success_type %}
+    <h1> {{ success_type }} Successfully Added</h1>
+        <p1>{{ user.first_name }}, your {{ success_type }} was successfully added to the database</p1>
+        {% if success_type == "Sale" %}
+            <form method="get" action= "/SalesPeople/{{ user.first_name }}">
+                <button type="submit">View my profile</button>
+            </form>
+        {% endif %}
+    {% endif %}
+    </body>
+</html>

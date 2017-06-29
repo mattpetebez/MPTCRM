@@ -21,12 +21,12 @@ def index(request):
 
 
 def get_sales_person(request, first_name):
-    if request.user.first_name == first_name:
+    if request.user.first_name == first_name or request.user.is_superuser:
         try:
-            sales_person_in_question = request.user.salesperson
+            sales_person_in_question = User.objects.get(first_name=first_name)
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
-        sales_person_sales = request.user.sale_set.all()
+        sales_person_sales = sales_person_in_question.sale_set.all()
         context = {'sales_person_in_question': sales_person_in_question, 'sales_person_sales': sales_person_sales}
         return render(request, 'SalesPeople/SalespersonDetail.html', context)
     else:
