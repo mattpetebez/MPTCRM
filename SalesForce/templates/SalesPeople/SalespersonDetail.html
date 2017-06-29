@@ -1,34 +1,45 @@
 {% if sales_person_in_question %}
     <h1>{{ sales_person_in_question.first_name }} {{ sales_person_in_question.last_name }}</h1>
-    {% if sales_person_sales %}
-        <h2>Sales:</h2>
-        <h3>Outstanding sales:</h3>
-        {% for sale in sales_person_sales %}
-           <ul>
-           {% if sale.sale_completed == False %}
-           <li>Amount: R{{ sale.amount }} Date due: {{ sale.due_date }} Date Acquired: {{ sale.date_acquired }}</li>
-           {% endif %}
-           </ul>
-        {% endfor %}
-        <h3>Completed Sales:</h3>
+    <h2>Overview</h2>
+    <h3>Sales</h3>
+    {% if recent_sales %}
+
+        <h4>Completed Sale Count: {{ completed_sales_count }}</h4>
+        <h4>Pending Sale Count: {{ pending_sales_count }}</h4>
+        <h4>Pending Sales</h4>
+        {% for sale in recent_sales %}
             <ul>
-            {% for sale in sales_person_sales %}
-                {% if sale.sale_completed %}
-                    <li>Amount: R {{ sale.amount }} Date completed: {{ sale.due_date }}</li>
+                {% if sale.sale_completed == False %}
+                    <li>Company: {{ sale.company.company_name }} Date due: {{ sale.due_date }}
+                        {% if sale.unique_id %} ( Reminder: {{ sale.unique_id }} ) {% else %}, R
+                            {{ sale.amount }} {% endif %}
+                    </li>
                 {% endif %}
             </ul>
-         {% endfor %}
-        <h1>Salesperson Sale statistics:</h1>
-        <h2>Total sales:</h2>
+        {% endfor %}
+        <h4>Completed Sales:</h4>
         <ul>
-            <li>Completed sales total: R{{ sales_person_in_question.total_sales_amount }}</li>
-            <li>Number of completed sales: {{ sales_person_in_question.total_sales_count }}</li>
-        </ul>
-        <h2>Pending sales:</h2>
+            {% for sale in recent_sales %}
+                {% if sale.sale_completed %}
+                    <li>Amount: R {{ sale.amount }} Date completed: {{ sale.due_date }}
+                        {% if sale.unique_id %} {{ sale.unique_id }} {% else %} R{{ sale.amount }} {% endif %}
+                    </li>
+                {% endif %}
+                </ul>
+
+            {% endfor %}
+    {% else %}
+        <h4>No past or upcoming sales</h4>
+    {% endif %}
+    <h3>Meetings:</h3>
+    {% if upcoming_meetings %}
         <ul>
-            <li>Pending sales total: R{{ sales_person_in_question.pending_sales_amount }}</li>
-            <li>Number of sales still pending: {{ sales_person_in_question.pending_sales_count }}</li>
+            {% for meeting in upcoming_meetings %}
+                <li> Company: {{ meeting.company.company_name }} Date: {{ meeting.meeting_date }} </li>
+            {% endfor %}
         </ul>
+    {% else %}
+        <h4>No upcoming meetings</h4>
     {% endif %}
     {% if request.user.first_name == sales_person_in_question.first_name %}
     <form method="get" action= "/SalesPeople/{{ request.user.first_name }}/AddSale">

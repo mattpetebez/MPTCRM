@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
-from django.contrib.auth.models import User
-from .models import SalesPerson, Sale, Company, CompanyRepresentative, Meeting
-from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
-from django.utils import timezone
+
+from datetime import datetime, timedelta
+
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
+from django.shortcuts import render
+from django.utils import timezone
+
+from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
+from .models import SalesPerson
+
+
 # Create your views here.
 
 
@@ -26,8 +32,19 @@ def get_sales_person(request, first_name):
             sales_person_in_question = User.objects.get(first_name=first_name)
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
-        sales_person_sales = sales_person_in_question.sale_set.all()
-        context = {'sales_person_in_question': sales_person_in_question, 'sales_person_sales': sales_person_sales}
+        completed_sales_count = len(sales_person_in_question.sale_set.filter(sale_completed=True))
+        pending_sales_count = len(sales_person_in_question.sale_set.filter(sale_completed=False))
+        upcoming_meetings = (sales_person_in_question.meeting_set.filter(meeting_date__lte=datetime.now()
+                                                                                           + timedelta(days=10)))
+        a_month_ago = datetime.now() - timedelta(days=30)
+        recent_sales = (sales_person_in_question.sale_set.filter(date_acquired__gte=a_month_ago)
+                        .order_by('date_acquired')[:5])
+
+        context = ({'sales_person_in_question': sales_person_in_question,
+                    'completed_sales_count': completed_sales_count,
+                    'recent_sales': recent_sales,
+                    'pending_sales_count': pending_sales_count,
+                    'upcoming_meetings': upcoming_meetings})
         return render(request, 'SalesPeople/SalespersonDetail.html', context)
     else:
         return HttpResponse("%s, you cannot view %s's profile." % (request.user.first_name, first_name))
@@ -49,7 +66,7 @@ def add_sale(request, first_name):
             post.sync_sale_add()
             user = request.user
             success_type = "Sale"
-            context = {'user':user, 'success_type':success_type}
+            context = {'user': user, 'success_type': success_type}
             return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
     else:
         if request.user.is_authenticated:
@@ -73,7 +90,7 @@ def add_meeting(request, first_name):
             return HttpResponse("Meeting successfully saved.")
         else:
             messages.error(request, "Error")
-            return render(request, 'SalesPeople/template.html', {'form':form})
+            return render(request, 'SalesPeople/template.html', {'form': form})
     else:
         if request.user.is_authenticated:
             if request.user.first_name == first_name:
@@ -116,5 +133,3 @@ def add_company_representative(request, first_name):
             return render(request, 'SalesPeople/AddCompanyRepresentative.html', {'form': form})
         else:
             return HttpResponse("Need to be logged in to do that")
-
-

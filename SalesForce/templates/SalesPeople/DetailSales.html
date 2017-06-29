@@ -1,0 +1,49 @@
+{% if sales_person_in_question %}
+    <h1>{{ sales_person_in_question.first_name }} {{ sales_person_in_question.last_name }}</h1>
+    {% if sales_person_sales %}
+        <h2>Sales:</h2>
+        <h3>Outstanding sales:</h3>
+        {% for sale in sales_person_sales %}
+            <ul>
+                {% if sale.sale_completed == False %}
+                    <li>Amount: R{{ sale.amount }} Date due: {{ sale.due_date }} Date
+                        Acquired: {{ sale.date_acquired }}</li>
+                {% endif %}
+            </ul>
+        {% endfor %}
+        <h3>Completed Sales:</h3>
+        <ul>
+            {% for sale in sales_person_sales %}
+                {% if sale.sale_completed %}
+                    <li>Amount: R {{ sale.amount }} Date completed: {{ sale.due_date }}</li>
+                {% endif %}
+                </ul>
+            {% endfor %}
+        <h1>Salesperson Sale statistics:</h1>
+        <h2>Total sales:</h2>
+        <ul>
+            <li>Completed sales total: R{{ sales_person_in_question.total_sales_amount }}</li>
+            <li>Number of completed sales: {{ sales_person_in_question.total_sales_count }}</li>
+        </ul>
+        <h2>Pending sales:</h2>
+        <ul>
+            <li>Pending sales total: R{{ sales_person_in_question.pending_sales_amount }}</li>
+            <li>Number of sales still pending: {{ sales_person_in_question.pending_sales_count }}</li>
+        </ul>
+    {% endif %}
+    {% if request.user.first_name == sales_person_in_question.first_name %}
+        <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
+            <button type="submit">Add Sale</button>
+        </form>
+        <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddMeeting">
+            <button type="submit">Add Meeting</button>
+        </form>
+        <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompany">
+            <button type="submit">Add Company</button>
+        </form>
+        <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative">
+            <button type="submit">Add Company Representative</button>
+        </form>
+    {% endif %}
+{% endif %}
+

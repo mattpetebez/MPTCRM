@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import models
+
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.db import models
+
+
 # Create your models here.
 
 
@@ -83,7 +84,7 @@ class Meeting(models.Model):
 
 
 class Sale(models.Model):
-    amount = models.FloatField(default=0)
+    amount = models.FloatField('Amount in Rands', default=0)
     date_acquired = models.DateField('Date sale was acquired')
     due_date = models.DateField('Date sale is due')
     sale_completed = models.BooleanField(default=False)
@@ -91,7 +92,7 @@ class Sale(models.Model):
     sales_people = models.ManyToManyField(User, blank=True)
     company_rep = models.ForeignKey(CompanyRepresentative, blank=True, null=True)
     company = models.ForeignKey(Company, null=True, blank=True)
-    unique_id = models.CharField(blank=True, null=True, max_length=20)
+    unique_id = models.CharField('Optional unique reminder', blank=True, null=True, max_length=20)
 
     def __str__(self):
         company_name = (Company.objects.get(id=self.company_id)).company_name
