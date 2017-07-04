@@ -1,21 +1,67 @@
 .page-header {
-    background-color: #ff9400;
+    background-color: #58C5C4;
     margin-top: 0;
-    padding: 20px 20px 20px 40px;
+    padding: 10px 20px 10px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
     font-size: 36pt;
     text-decoration: none;
+    display: inline-block
 }
 
+.div-header {
+    background-color: #58C5C4;
+    padding: 20px 20px 20px 40px;
+}
+
+.div-header h1, .div-header h1 a, .div-header h1 a:visited, h1 a:active {
+    color: #ffffff;
+    font-size: 28pt;
+}
+
+.div-header a {
+    float: right;
+}
+
+.div-block {
+    background-color: #b1ddda;
+}
+
+.div-block h1 {
+    font-size: 20pt;
+    color: #ffffff;
+    padding: 10px 10px 10px 20px;
+    background-color: #58C5C4;
+}
+
+.div-block h2, h3 {
+    font-size: 18pt;
+    color: #ffffff;
+    padding: 10px 10px 10px 20px;
+    background-color: #58C5C4;
+}
+
+.div-block h4 {
+    font-size: 16pt;
+    color: #000000;
+    padding: 5px 5px 5px 10px;
+}
+
+.div-block li {
+    margin-left: inherit;
+}
 .content {
     margin-left: 40px;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
+h2, h3, h4 {
+    font-family: "Roboto+Condensed", bold;
+}
+
+h1 {
+    font-family: 'Anton';
 }
 
 .date {
@@ -43,4 +89,20 @@ h1, h2, h3, h4 {
 
 .post h1 a, .post h1 a:visited {
     color: #000000;
+}
+
+.button {
+    background-color: #c60303;
+    font-family: "Anton";
+    border: groove;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+    height: 4%;
+    margin-left: 25%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    display: inline-block;
+    font-size: 16px;
 }

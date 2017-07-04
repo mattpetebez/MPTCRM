@@ -1,33 +1,35 @@
-{% load static %}
-
-<script type="text/javascript" src="/my_admin/jsi18n/"></script>
-<script type="text/javascript" src="/media/admin/js/core.js"></script>
-<link rel="stylesheet" type="text/css"
-    href="{% static 'admin/css/forms.css' %} "/>
-<link rel="stylesheet" type="text/css"
-    href="{% static 'admin/css/base.css' %} "/>
-<link rel="stylesheet" type="text/css"
-    href="{% static 'admin/css/global.css' %}"/>
-<link rel="stylesheet" type="text/css"
-    href="{% static 'admin/css/widgets.css' %}"/>
-<script type="text/javascript"
-    src="/admin/jsi18n/"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/core.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/jquery.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/jquery.init.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/actions.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/calendar.js' %}"></script>
-<script type="text/javascript"
-    src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
+{#{% load static %}#}
+{##}
+{#<script type="text/javascript" src="/my_admin/jsi18n/"></script>#}
+{#<script type="text/javascript" src="/media/admin/js/core.js"></script>#}
+{#<link rel="stylesheet" type="text/css"#}
+{#    href="{% static 'admin/css/forms.css' %} "/>#}
+{#<link rel="stylesheet" type="text/css"#}
+{#    href="{% static 'admin/css/base.css' %} "/>#}
+{#<link rel="stylesheet" type="text/css"#}
+{#    href="{% static 'admin/css/global.css' %}"/>#}
+{#<link rel="stylesheet" type="text/css"#}
+{#    href="{% static 'admin/css/widgets.css' %}"/>#}
+{#<script type="text/javascript"#}
+{#    src="/admin/jsi18n/"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/core.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/jquery.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/jquery.init.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/actions.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/calendar.js' %}"></script>#}
+{#<script type="text/javascript"#}
+{#    src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>#}
+{% extends 'base.html' %}
+{% block content %}
 <h1>Add Company</h1>
-<p1>Please note: if the sales representative you wish to add is not in the database, select the link below:</p1>
+    <p>Please note: if the sales representative you wish to add is not in the database, select the link below:</p>
     <form method="get" action= "/SalesPeople/{{ sales_person_in_question.first_name }}/AddCompanyRepresentative">
         <button type="submit">Add Company Representative</button>
     </form>
@@ -35,3 +37,4 @@
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
+{% endblock %}

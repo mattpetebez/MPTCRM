@@ -1,8 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
 {% if sales_person_in_question %}
     <h1>{{ sales_person_in_question.first_name }} {{ sales_person_in_question.last_name }}</h1>
     {% if sales_person_sales %}
         <h2>Sales:</h2>
         <h3>Outstanding sales:</h3>
+        {% block content %}
         {% for sale in sales_person_sales %}
             <ul>
                 {% if sale.sale_completed == False %}
@@ -11,6 +14,7 @@
                 {% endif %}
             </ul>
         {% endfor %}
+        {% endblock %}
         <h3>Completed Sales:</h3>
         <ul>
             {% for sale in sales_person_sales %}

@@ -3,15 +3,17 @@ from __future__ import unicode_literals
 
 from datetime import datetime, timedelta
 
+# from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.generic.edit import UpdateView
 
 from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
-from .models import SalesPerson
+from .models import SalesPerson, Sale
 
 
 # Create your views here.
@@ -19,7 +21,7 @@ from .models import SalesPerson
 
 def index(request):
     if request.user.is_authenticated():
-        sales_person_list = User.objects.order_by()
+        sales_person_list = User.objects.all().order_by('first_name')
         context = {'sales_person_list': sales_person_list}
         return render(request, 'SalesPeople/index.html', context)
     else:
@@ -55,6 +57,7 @@ def get_sale(request, company_name, first_name):  # Need to build a list of the 
 
 
 def add_sale(request, first_name):
+
     if request.method == "POST":
         form = AddSaleForm(request.POST)
         if form.is_valid():
@@ -133,3 +136,22 @@ def add_company_representative(request, first_name):
             return render(request, 'SalesPeople/AddCompanyRepresentative.html', {'form': form})
         else:
             return HttpResponse("Need to be logged in to do that")
+
+
+def show_sales(request, first_name):
+    if (request.user.first_name == first_name and request.user.is_authenticated) or request.user.is_superuser:
+        try:
+            sales_person_in_question = User.objects.get(first_name=first_name)
+        except SalesPerson.DoesNotExist:
+            raise Http404("Sales person does not exist")
+        completed_sales = sales_person_in_question.sale_set.filter(sale_completed=True)
+        pending_sales = (sales_person_in_question.sale_set.filter(sale_completed=False))
+        context = ({'completed_sales': completed_sales, 'pending_sales': pending_sales,
+                    'sales_person': sales_person_in_question})
+        return render(request, 'SalesPeople/ViewSales.html', context)
+
+
+class update_sale(UpdateView):
+    model = Sale
+    fields = '__all__'
+    template_name_suffix = 'Edit'

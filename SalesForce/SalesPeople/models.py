@@ -83,6 +83,20 @@ class Meeting(models.Model):
 #         return self.product_name
 
 
+class SaleStatus(models.Model):
+    status = models.CharField("Sale Status", max_length=12, default="Opportunity")
+
+    def __str__(self):
+        return self.status
+
+
+class SaleProbability(models.Model):
+    probability = models.CharField(max_length=10, default="Potential")
+
+    def __str__(self):
+        return self.probability
+
+
 class Sale(models.Model):
     amount = models.FloatField('Amount in Rands', default=0)
     date_acquired = models.DateField('Date sale was acquired')
@@ -91,8 +105,10 @@ class Sale(models.Model):
     meetings = models.ManyToManyField(Meeting, blank=True)
     sales_people = models.ManyToManyField(User, blank=True)
     company_rep = models.ForeignKey(CompanyRepresentative, blank=True, null=True)
-    company = models.ForeignKey(Company, null=True, blank=True)
+    company = models.ForeignKey("Company", Company, null=True, blank=True)
     unique_id = models.CharField('Optional unique reminder', blank=True, null=True, max_length=20)
+    status = models.ForeignKey(SaleStatus, default=SaleStatus.objects.first())
+    probability = models.ForeignKey(SaleProbability, default=SaleProbability.objects.first())
 
     def __str__(self):
         company_name = (Company.objects.get(id=self.company_id)).company_name

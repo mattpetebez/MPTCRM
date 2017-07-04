@@ -1,31 +1,23 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>Sales Force</title>
+        <title>MPT Sales Tracker</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href='http://fonts.googleapis.com/css?family=Arimo%3A300%2C400%2C700%2C400italic%2C700italic&#038;subset=latin&#038;ver=9c560d6b9d8285781e4d51a9a10abcac' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:Bold|Anton' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'SalesPeople/style.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            <h1><a href="/">Sales People</a></h1>
-        </div>
-
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% for post in posts %}
-                    <div class="post">
-                        <div class="date">
-                            {{ post.published_date }}
-                        </div>
-                        <h1><a href="">{{ post.title }}</a></h1>
-                        <p>{{ post.text|linebreaksbr }}</p>
-                    </div>
-                {% endfor %}t
-                </div>
+    <div class="page-header">
+        <h1><a href="/">MPT SalesTracker</a></h1><a href="/logout">Log out</a>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
+    </div>
     </body>
 </html>
