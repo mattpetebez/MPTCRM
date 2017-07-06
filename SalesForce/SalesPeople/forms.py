@@ -18,6 +18,7 @@ class AddMeetingForm(forms.ModelForm):
     class Meta:
         model = Meeting
         exclude = ['sales_person', 'proactive']
+        # widgets = {}
 
 
 class AddCompanyForm(forms.ModelForm):

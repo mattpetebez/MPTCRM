@@ -65,6 +65,7 @@ class Meeting(models.Model):
     company = models.ForeignKey(Company)
     meeting_date = models.DateTimeField('Date and time of meeting')
     proactive = models.BooleanField(default=False)
+    attended = models.BooleanField(default=False)
 
     def __str__(self):
         return_val = "%s: %s" % (self.company.company_name, self.sales_person.first_name)
@@ -87,14 +88,14 @@ class SaleStatus(models.Model):
     status = models.CharField("Sale Status", max_length=12, default="Opportunity")
 
     def __str__(self):
-        return self.status
+        return str(self.status)
 
 
 class SaleProbability(models.Model):
-    probability = models.CharField(max_length=10, default="Potential")
+    probability = models.CharField("Sale Probability", max_length=10, default="Potential")
 
     def __str__(self):
-        return self.probability
+        return str(self.probability)
 
 
 class Sale(models.Model):

@@ -1,0 +1,16 @@
+<html>
+<body>
+{% if success_type %}
+    <h1> {{ success_type }} Successfully Edited</h1>
+    {% if success_type == "Sale" %}
+        <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewSales">
+            <button type="submit">View my sales</button>
+        </form>
+    {% elif success_type == "Meeting" %}
+        <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewMeetings">
+            <button type="submit">View my meetings</button>
+        </form>
+    {% endif %}
+{% endif %}
+</body>
+</html>

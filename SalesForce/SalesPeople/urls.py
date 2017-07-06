@@ -2,7 +2,7 @@
 from django.conf.urls import *
 
 from SalesPeople import views
-from SalesPeople.views import update_sale
+from SalesPeople.views import UpdateSale, UpdateMeeting
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^(?P<first_name>\w+)/AddCompanyRepresentative/', views.add_company_representative),
     # url(r'^(?P<first_name>\w+)/sales/(?P<company_name>\w+)/$', views.get_sale, name='company_name'),
     url(r'^(?P<first_name>\w+)/ViewSales/', views.show_sales, name='first_name'),
-    url(r'^(?P<first_name>\w+)/EditSale/(?P<pk>[\w-]+)$', update_sale.as_view(), name='update_sale'),
+    url(r'^(?P<first_name>\w+)/ViewMeetings/', views.show_meetings, name='first_name'),
+    url(r'^(?P<first_name>\w+)/EditSale/(?P<pk>[\w-]+)$', UpdateSale.as_view(), name='update_sale'),
+    url(r'^(?P<first_name>\w+)/EditMeeting/(?P<pk>[\w-]+)$', UpdateMeeting.as_view(), name='update_meeting'),
 ]

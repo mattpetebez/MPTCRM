@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% if sales_person %}
+    {% block title %}<h1></h1>
+    {% endblock %}
+    {% block content %}
+        <div class="div-header">
+            <h1>{{ sales_person.first_name }}'s Meetings</h1>
+        </div>
+        <div class="div-block">
+            <h1>Upcoming meetings</h1>
+            {% if meetings_today %}
+                <h4>Meetings Today</h4>
+                <ul>
+                    {% for meeting in meetings_today %}
+                        <li>Company: {{ meeting.company.company_name }} Time: {{ meeting.meeting_date.time }}
+                            {% if sales_person.first_name == request.user.first_name %}
+                                <form method="get"
+                                      action="/SalesPeople/{{ request.user.first_name }}/EditMeeting/{{ meeting.id }}">
+                                    <button class="button" type="submit">Edit</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}<h4>No meetings today</h4>{% endif %}
+        </div>
+        <div class="div-block">
+            <h1>Upcoming meetings</h1>
+            {% if meetings_upcoming %}
+                <ul>
+                    {% for meeting in meetings_upcoming %}
+                        <li>Company: {{ meeting.company.company_name }} Time: {{ meeting.meeting_date }}
+                            {% if request.user.first_name == sales_person.first_name %}
+                                <form method="get"
+                                      action="/SalesPeople/{{ request.user.first_name }}/EditMeeting/{{ meeting.id }}">
+                                    <button class="button" type="submit">Edit</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h4>No upcoming meetings</h4>
+            {% endif %}
+        </div>
+
+        {% if request.user.first_name == sales_person.first_name %}
+            <div>
+                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddMeeting">
+                    <button class="button" type="submit">Add Meeting</button>
+                </form>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endif %}
+

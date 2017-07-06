@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.views.generic.edit import UpdateView
 
 from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
-from .models import SalesPerson, Sale
+from .models import SalesPerson, Sale, Meeting
 
 
 # Create your views here.
@@ -151,7 +151,43 @@ def show_sales(request, first_name):
         return render(request, 'SalesPeople/ViewSales.html', context)
 
 
-class update_sale(UpdateView):
+def show_meetings(request, first_name):
+    if (request.user.first_name == first_name and request.user.is_authenticated) or request.user.is_superuser:
+        try:
+            sales_person_in_question = User.objects.get(first_name=first_name)
+        except SalesPerson.DoesNotExist:
+            raise Http404("Sales person does not exist")
+        yesterday = timezone.datetime.today() - timedelta(days=1)
+        today = timezone.datetime.today()
+        tomorrow = timezone.datetime.today() + timedelta(days=1)
+        meetings_today = sales_person_in_question.meeting_set.filter(meeting_date__range=(yesterday, today))
+        meetings_upcoming = sales_person_in_question.meeting_set.filter(meeting_date__gt=today)
+
+        context = ({'sales_person': sales_person_in_question, 'meetings_today': meetings_today,
+                    'meetings_upcoming': meetings_upcoming})
+        return render(request, 'SalesPeople/ViewMeetings.html', context)
+
+
+class UpdateSale(UpdateView):
     model = Sale
     fields = '__all__'
     template_name_suffix = 'Edit'
+
+    def form_valid(self, form):
+        form.save()
+        success_type = "Sale"
+        context = {'success_type': success_type}
+        return render(self.request, 'SalesPeople/SuccessfullyEdited.html', context)
+
+
+class UpdateMeeting(UpdateView):
+    model = Meeting
+    fields = ['meeting_date', 'company_representative', 'company', 'attended']
+    exclude = ['proactive']
+    template_name_suffix = 'Edit'
+
+    def form_valid(self, form):
+        form.save()
+        success_type = "Meeting"
+        context = {'success_type': success_type}
+        return render(self.request, 'SalesPeople/SuccessfullyEdited.html', context)

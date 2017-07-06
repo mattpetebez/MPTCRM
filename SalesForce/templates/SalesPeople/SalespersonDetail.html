@@ -49,8 +49,9 @@
                 <h4>No upcoming meetings</h4>
             {% endif %}
         </div>
-        {% if request.user.first_name == sales_person_in_question.first_name %}
             <div>
+                {% if request.user.first_name == sales_person_in_question.first_name %}
+
                 <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
                     <button class="button" type="submit">Add Sale</button>
                 </form>
@@ -63,11 +64,15 @@
                 <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative">
                     <button class="button" type="submit">Add Company Representative</button>
                 </form>
-                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/ViewSales">
+                {% endif %}
+                <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewSales">
                     <button class="button" type="submit">View My Sales</button>
                 </form>
+                <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewMeetings">
+                    <button class="button" type="submit">View My Meetings</button>
+                </form>
             </div>
-        {% endif %}
+
     {% endblock %}
 {% endif %}
 

@@ -26,7 +26,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-            {% else %}<p>No pending sales</p>{% endif %}
+            {% else %}<h4>No pending sales</h4>{% endif %}
         </div>
         <div class="div-block">
             <h1>Completed Sales:</h1>
@@ -45,14 +45,16 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <h4>No Completed sales to display</h4>
+                <h4>No completed sales</h4>
                 </div>
             {% endif %}
+        {% if request.user.first_name == sales_person.first_name %}
         <div>
             <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
                 <button class="button" type="submit">Add Sale</button>
             </form>
         </div>
+        {% endif %}
     {% endblock %}
 {% endif %}
 
