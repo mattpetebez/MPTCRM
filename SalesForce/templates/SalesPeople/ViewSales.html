@@ -1,54 +1,82 @@
 {% extends 'base.html' %}
 
-{% if sales_person %}
+{% if user_in_question %}
     {% block title %}<h1></h1>
     {% endblock %}
     {% block content %}
         <div class="div-header">
-            <h1>{{ sales_person.first_name }}'s Sales</h1>
+            <h1>{{ user_in_question.first_name }}'s Sales</h1>
         </div>
         <div class="div-block">
             <h1>Pending Sales</h1>
             {% if pending_sales %}
-                <h4>Pending Sale Count: {{ pending_sales.count }}</h4>
-                <h4>Pending Sales</h4>
+                <h4>Number of opportunities: {{ pending_sales.count }}</h4>
+                <h4>Total opportunities value: R{{ sales_person.pending_sales_amount }}</h4>
                 <ul>
                     {% for sale in pending_sales %}
-                        <li>Company: {{ sale.company.company_name }} Date due: {{ sale.due_date }}
-                            Value: {{ sale.amount }}
-                            {% if sale.unique_id %} ( Reminder: {{ sale.unique_id }} ){% endif %}
-                            {% if sales_person.first_name == request.user.first_name %}
-                                <form method="get"
-                                      action="/SalesPeople/{{ request.user.first_name }}/EditSale/{{ sale.id }}">
-                                    <button class="button" type="submit">Edit</button>
-                                </form>
-                            {% endif %}
-                        </li>
+                        <div class="view-items">
+                            <li>{{ sale.company.company_name }}, due {{ sale.due_date }} (<strong>Quote
+                                Number: {{ sale.quote_number }}</strong>)
+                                {% if sale.unique_id %} ( Reminder: {{ sale.unique_id }}){% endif %}</li>
+                            <div class="button-container-outer">
+                                {% if request.user.first_name == user_in_question.first_name %}
+                                    <div class="button-container-inner">
+                                        <form method="get"
+                                              action="/SalesPeople/{{ user_in_question.first_name }}/EditSale/{{ sale.id }}">
+                                            <button class="div-block-button" type="submit">Edit</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                {% if request.user.is_superuser %}
+                                    <div class="button-container-inner">
+                                        <form method="get"
+                                              action="/SalesPeople/{{ user_in_question.first_name }}/DeleteSale/{{ sale.id }}">
+                                            <button class="view-edit-button" type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     {% endfor %}
                 </ul>
             {% else %}<h4>No pending sales</h4>{% endif %}
         </div>
         <div class="div-block">
             <h1>Completed Sales:</h1>
+            <h4>Number of sales made: {{ completed_sales.count }}</h4>
+            <h4>Value of sales made: {{ sales_person.total_sales_amount }}</h4>
             {% if completed_sales %}
                 <ul>
                     {% for sale in completed_sales %}
+                        <div class="view-items">
                         <li>Company: {{ sale.company.company_name }}Date completed: {{ sale.due_date }}
-                            {% if sale.unique_id %} {{ sale.unique_id }}{% endif %}
-                            {% if request.user.first_name == sales_person.first_name %}
+                            {% if sale.unique_id %} {{ sale.unique_id }}{% endif %}</li>
+                            <div class="button-container-outer">
+                                {% if request.user.first_name == user_in_question.first_name %}
+                                    <div class="button-container-inner">
                                 <form method="get"
-                                      action="/SalesPeople/{{ request.user.first_name }}/EditSale/{{ sale.id }}">
-                                    <button class="button" type="submit">Edit</button>
+                                      action="/SalesPeople/{{ user_in_question.first_name }}/EditSale/{{ sale.id }}">
+                                    <button class="div-block-button" type="submit">Edit</button>
                                 </form>
-                            {% endif %}
-                        </li>>
+                                    </div>
+                                {% endif %}
+                                {% if request.user.is_superuser %}
+                                    <div class="button-container-inner">
+                                        <form method="get"
+                                              action="/SalesPeople/{{ request.user.first_name }}/DeleteSale/{{ sale.id }}">
+                                            <button class="view-edit-button" type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     {% endfor %}
                 </ul>
             {% else %}
                 <h4>No completed sales</h4>
                 </div>
             {% endif %}
-        {% if request.user.first_name == sales_person.first_name %}
+        {% if request.user.first_name == user_in_question.first_name %}
         <div>
             <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
                 <button class="button" type="submit">Add Sale</button>

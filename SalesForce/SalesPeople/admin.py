@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SalesPerson, Sale, Company, Meeting, CompanyRepresentative, SaleStatus, SaleProbability
+from .models import SalesPerson, Sale, Company, Meeting, CompanyRepresentative, SaleProbability, SaleStatus
 
 # Register your models here.
 admin.site.register(Sale)

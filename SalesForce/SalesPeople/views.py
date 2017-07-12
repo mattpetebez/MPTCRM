@@ -10,7 +10,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 
 from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
 from .models import SalesPerson, Sale, Meeting
@@ -65,8 +65,10 @@ def add_sale(request, first_name):
             post.sale_completed = False
             post.date_acquired = timezone.now().date()
             post.save()
+            post.quote_number = "MPT%a" % post.id
             post.sales_people.add(request.user)
             post.sync_sale_add()
+            post.save()
             user = request.user
             success_type = "Sale"
             context = {'user': user, 'success_type': success_type}
@@ -90,7 +92,9 @@ def add_meeting(request, first_name):
             post.sales_person = request.user
             post.proactive = True
             post.save()
-            return HttpResponse("Meeting successfully saved.")
+            success_type = "Meeting"
+            context = {'success_type': success_type}
+            return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
         else:
             messages.error(request, "Error")
             return render(request, 'SalesPeople/template.html', {'form': form})
@@ -108,8 +112,9 @@ def add_company(request, first_name):
         form = AddCompanyForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.sales_representative.add(request.user)
             post.save()
+            post.sales_representative.add(request.user)
+
             return HttpResponse("Company successfully saved.")
         else:
             messages.error(request, "Error")
@@ -141,13 +146,15 @@ def add_company_representative(request, first_name):
 def show_sales(request, first_name):
     if (request.user.first_name == first_name and request.user.is_authenticated) or request.user.is_superuser:
         try:
-            sales_person_in_question = User.objects.get(first_name=first_name)
+            user_in_question = User.objects.get(first_name=first_name)
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
-        completed_sales = sales_person_in_question.sale_set.filter(sale_completed=True)
-        pending_sales = (sales_person_in_question.sale_set.filter(sale_completed=False))
+        sales_person_in_question = SalesPerson.objects.get(user=user_in_question)
+
+        completed_sales = user_in_question.sale_set.filter(sale_completed=True)
+        pending_sales = (user_in_question.sale_set.filter(sale_completed=False))
         context = ({'completed_sales': completed_sales, 'pending_sales': pending_sales,
-                    'sales_person': sales_person_in_question})
+                    'sales_person': sales_person_in_question, 'user_in_question': user_in_question})
         return render(request, 'SalesPeople/ViewSales.html', context)
 
 
@@ -191,3 +198,19 @@ class UpdateMeeting(UpdateView):
         success_type = "Meeting"
         context = {'success_type': success_type}
         return render(self.request, 'SalesPeople/SuccessfullyEdited.html', context)
+
+
+class DeleteMeeting(DeleteView):
+    model = Meeting
+    template_name_suffix = "Delete"
+
+    def get_success_url(self):
+        return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Meeting"})
+
+
+class DeleteSale(DeleteView):
+    model = Sale
+    template_name_suffix = "Delete"
+
+    def get_success_url(self):
+        return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Sale"})

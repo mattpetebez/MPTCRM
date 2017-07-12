@@ -8,8 +8,26 @@
     color: #ffffff;
     font-size: 36pt;
     text-decoration: none;
-    display: inline-block
+    display: inline-block;
+
 }
+
+.page-header-links {
+    /*display: inline-block;*/
+    float: right;
+    /*position: relative;*/
+    /*padding-bottom: 100%;*/
+    /*margin-bottom: 10%;*/
+    text-align: center;
+
+}
+
+.page-header-links a {
+    color: white;
+    /*position: absolute;*/
+    text-align: center;
+}
+
 
 .div-header {
     background-color: #58C5C4;
@@ -27,6 +45,7 @@
 
 .div-block {
     background-color: #b1ddda;
+    /*display:block*/
 }
 
 .div-block h1 {
@@ -36,6 +55,30 @@
     background-color: #58C5C4;
 }
 
+.div-block ul {
+    /*display:inline-block;*/
+    background-color: #b1ddda;
+    padding: 10px 10px 30px 30px;
+}
+
+.div-block li {
+    /*display:inherit;*/
+    float: left;
+    /*display:inline-block;*/
+}
+
+.view-edit-button {
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: -1%
+}
+
+.view-delete-button {
+    margin-left: 1%;
+    margin-top: -1%;
+    background-color: #c60303;
+
+}
 .div-block h2, h3 {
     font-size: 18pt;
     color: #ffffff;
@@ -105,4 +148,18 @@ h1 {
     margin-bottom: 0%;
     display: inline-block;
     font-size: 16px;
+}
+
+.button-container-outer {
+    width: 20%;
+    text-align: center;
+    display: inline-block;
+}
+
+.button-container-inner {
+    display: inline-block;
+}
+
+.view-items {
+
 }

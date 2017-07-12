@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.deconstruct import deconstructible
 
 
 # Create your models here.
@@ -84,18 +85,23 @@ class Meeting(models.Model):
 #         return self.product_name
 
 
+@deconstructible
 class SaleStatus(models.Model):
-    status = models.CharField("Sale Status", max_length=12, default="Opportunity")
+    status = models.CharField("Sale Status", max_length=12, default="Opportunity", null=True, blank=True)
 
     def __str__(self):
         return str(self.status)
 
 
+@deconstructible
 class SaleProbability(models.Model):
-    probability = models.CharField("Sale Probability", max_length=10, default="Potential")
+    probability = models.CharField("Sale Probability", max_length=10, default="Potential", null=True, blank=True)
 
     def __str__(self):
-        return str(self.probability)
+        return self.probability
+
+        # def __init__(self):
+        #     self.probability = "Potential"
 
 
 class Sale(models.Model):
@@ -108,8 +114,10 @@ class Sale(models.Model):
     company_rep = models.ForeignKey(CompanyRepresentative, blank=True, null=True)
     company = models.ForeignKey("Company", Company, null=True, blank=True)
     unique_id = models.CharField('Optional unique reminder', blank=True, null=True, max_length=20)
-    status = models.ForeignKey(SaleStatus, default=SaleStatus.objects.first())
-    probability = models.ForeignKey(SaleProbability, default=SaleProbability.objects.first())
+    sale_status = models.ForeignKey(SaleStatus)
+    sale_probability = models.ForeignKey(SaleProbability)
+    quote_number = models.CharField('Quote Number', default="MPT", max_length=10)
+    date_sale_completed = models.DateField('Date of sale completion', null=True, blank=True, unique=True)
 
     def __str__(self):
         company_name = (Company.objects.get(id=self.company_id)).company_name
@@ -131,11 +139,8 @@ class Sale(models.Model):
                 user.salesperson.pending_sales_count += 1
                 user.salesperson.save()
 
+    def assign_quote_number(self):
+        self.quote_number = ("MPT%a" % self.id)
 
-
-
-
-
-
-
-
+# class Supplier(models.Model):
+#     supplier_name_ = models.CharField('Supplier Name', max_length=20, default="The penis company")

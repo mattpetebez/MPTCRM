@@ -4,8 +4,12 @@
     <h1> {{ success_type }} Successfully Added</h1>
         <p1>{{ user.first_name }}, your {{ success_type }} was successfully added to the database</p1>
         {% if success_type == "Sale" %}
-            <form method="get" action= "/SalesPeople/{{ user.first_name }}">
+            <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewSales">
                 <button type="submit">View my profile</button>
+            </form>
+        {% elif success_type == "Meeting" %}
+            <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewMeetings">
+                <button type="submit">View my Meetings</button>
             </form>
         {% endif %}
     {% endif %}
