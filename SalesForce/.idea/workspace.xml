@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0581f4f2-da43-419c-aa78-d6380f574576" name="Default" comment=" Haven't done this yet:&#10; &#10; Need to get a sales breakdown overview. Also, need custom form inputting (for rands or potentially dollars in the future) for models not using the model form. Need to add a form wrapper per field so users can add other models whilst adding models. &#10; &#10;Need menu widget in the header. All models need date added.&#10;&#10;Required to add editing of company, company representative, and to neaten by adding files to group all this crap together. Finally, delete sale, meeting, company and company representative needs to be added.&#10;&#10;Required to edit the success edit and added pages for all models to allow a link back to the profile.&#10;&#10;Got rid of the hideous red ugly buttons on the page, and opted for heading in line buttons to take user to sub-dashboards. Added the successfully edited and added things for meeting, company and company representative. Still need to fix the delete return html, or develop my own one.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/SalesPeople/ViewDetailSales.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/SalesPeople/meetingEdit.html" />
+    <list default="true" id="0581f4f2-da43-419c-aa78-d6380f574576" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/forms.py" afterPath="$PROJECT_DIR$/SalesPeople/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css" afterPath="$PROJECT_DIR$/SalesPeople/static/SalesPeople/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/urls.py" afterPath="$PROJECT_DIR$/SalesPeople/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SalesPeople/views.py" afterPath="$PROJECT_DIR$/SalesPeople/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/AddMeeting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/SalespersonDetail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/SuccessfullyAdded.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/SuccessfullyAdded.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SalesPeople/ViewSales.html" afterPath="$PROJECT_DIR$/templates/SalesPeople/ViewSales.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -813,7 +802,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499852123344</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary=" Haven't done this yet:&#10; &#10; Need to get a sales breakdown overview. Also, need custom form inputting (for rands or potentially dollars in the future) for models not using the model form. Need to add a form wrapper per field so users can add other models whilst adding models. &#10; &#10;Need menu widget in the header. All models need date added.&#10;&#10;Required to add editing of company, company representative, and to neaten by adding files to group all this crap together. Finally, delete sale, meeting, company and company representative needs to be added.&#10;&#10;Required to edit the success edit and added pages for all models to allow a link back to the profile.&#10;&#10;Got rid of the hideous red ugly buttons on the page, and opted for heading in line buttons to take user to sub-dashboards. Added the successfully edited and added things for meeting, company and company representative. Still need to fix the delete return html, or develop my own one.">
+      <created>1499948920793</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1499948920793</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
