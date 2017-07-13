@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
 {% if user_in_question %}
-    {% block title %}<h1></h1>
+    {% block title %}<h1>Lekker</h1>
     {% endblock %}
     {% block content %}
         <div class="div-header">
             <h1>{{ user_in_question.first_name }}'s Sales</h1>
         </div>
         <div class="div-block">
-            <h1>Pending Sales</h1>
+            <h1>Pending Sales
+                <div class="div-block-header-button">
+                    <form method="get" action="/SalesPeople/{{ user_in_question.first_name }}/ViewDetailSales">
+                        <button class="div-block-button" type="submit">View all opportunities</button>
+                    </form>
+                </div>
+            </h1>
+
             {% if pending_sales %}
                 <h4>Number of opportunities: {{ pending_sales.count }}</h4>
                 <h4>Total opportunities value: R{{ sales_person.pending_sales_amount }}</h4>
@@ -42,7 +49,13 @@
             {% else %}<h4>No pending sales</h4>{% endif %}
         </div>
         <div class="div-block">
-            <h1>Completed Sales:</h1>
+            <h1>Completed Sales
+                <div class="div-block-header-button">
+                    <form method="get" action="/SalesPeople/{{ user_in_question.first_name }}/ViewDetailSales">
+                        <button class="div-block-button" type="submit">View all Sales closed</button>
+                    </form>
+                </div>
+            </h1>
             <h4>Number of sales made: {{ completed_sales.count }}</h4>
             <h4>Value of sales made: {{ sales_person.total_sales_amount }}</h4>
             {% if completed_sales %}
@@ -62,7 +75,7 @@
                                 {% endif %}
                                 {% if request.user.is_superuser %}
                                     <div class="button-container-inner">
-                                        <form method="get"
+                                        <form method="post"
                                               action="/SalesPeople/{{ request.user.first_name }}/DeleteSale/{{ sale.id }}">
                                             <button class="view-edit-button" type="submit">Delete</button>
                                         </form>

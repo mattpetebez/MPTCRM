@@ -115,7 +115,9 @@ def add_company(request, first_name):
             post.save()
             post.sales_representative.add(request.user)
 
-            return HttpResponse("Company successfully saved.")
+            success_type = "company"
+            context = {'success_type': success_type}
+            return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
         else:
             messages.error(request, "Error")
             return render(request, 'SalesPeople/template.html', {'form': form})
@@ -134,7 +136,9 @@ def add_company_representative(request, first_name):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return HttpResponse("Company Representative %s %s added successfully" % (post.first_name, post.last_name))
+            success_type = 'Company representative'
+            context = {'success_type': success_type}
+            return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
     else:
         if request.user.is_authenticated:
             form = AddCompanyRepresentativeForm()
@@ -151,11 +155,41 @@ def show_sales(request, first_name):
             raise Http404("Sales person does not exist")
         sales_person_in_question = SalesPerson.objects.get(user=user_in_question)
 
-        completed_sales = user_in_question.sale_set.filter(sale_completed=True)
-        pending_sales = (user_in_question.sale_set.filter(sale_completed=False))
+        completed_sales = user_in_question.sale_set.filter(sale_completed=True).order_by('due_date')[:5]
+        pending_sales = (user_in_question.sale_set.filter(sale_completed=False)).order_by('due_date')[:5]
         context = ({'completed_sales': completed_sales, 'pending_sales': pending_sales,
                     'sales_person': sales_person_in_question, 'user_in_question': user_in_question})
         return render(request, 'SalesPeople/ViewSales.html', context)
+
+
+def view_pending_sales(request, first_name):
+    if (request.user.first_name == first_name and request.user.is_authenticated) or request.user.is_superuser:
+        try:
+            user_in_question = User.objects.get(first_name=first_name)
+        except SalesPerson.DoesNotExist:
+            raise Http404("Sales person does not exist")
+        sales_person = SalesPerson.objects.get(user=user_in_question)
+        pending_sales = user_in_question.sale_set.filter(sale_completed=False).order_by('due_date')
+        context = ({'pending_sales': pending_sales, 'sales_person': sales_person,
+                    'user_in_question': user_in_question})
+        return render(request, 'SalesPeople/ViewDetailSales.htmlSales.html', context)
+    else:
+        return HttpResponse("What the fuck is going on")
+
+
+def view_completed_sales(request, first_name):
+    if (request.user.first_name == first_name and request.user.is_authenticated) or request.user.is_superuser:
+        try:
+            user_in_question = User.objects.get(first_name=first_name)
+        except SalesPerson.DoesNotExist:
+            raise Http404("Sales person does not exist")
+        sales_person = SalesPerson.objects.get(user=user_in_question)
+        sales = user_in_question.sale_set.filter(sale_completed=True).order_by('due_date')
+        context = ({'pending_sales': sales, 'sales_person': sales_person,
+                    'user_in_question': user_in_question})
+        return render(request, 'SalesPeople/ViewDetailSales.html', context)
+    else:
+        return HttpResponse("What the fuck is going on")
 
 
 def show_meetings(request, first_name):
@@ -214,3 +248,4 @@ class DeleteSale(DeleteView):
 
     def get_success_url(self):
         return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Sale"})
+

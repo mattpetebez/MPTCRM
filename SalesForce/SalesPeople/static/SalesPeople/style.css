@@ -9,7 +9,6 @@
     font-size: 36pt;
     text-decoration: none;
     display: inline-block;
-
 }
 
 .page-header-links {
@@ -53,6 +52,8 @@
     color: #ffffff;
     padding: 10px 10px 10px 20px;
     background-color: #58C5C4;
+    position: relative;
+    /*display: inline-block;*/
 }
 
 .div-block ul {
@@ -158,6 +159,22 @@ h1 {
 
 .button-container-inner {
     display: inline-block;
+}
+
+.div-block-header-button {
+    float: right;
+    font-family: Arial;
+    font-size: 10pt;
+    color: black;
+    background-color: #58C5C4;
+}
+
+.div-block-header-button button {
+    background-color: #58C5C4;
+    font-size: 12pt;
+    font-family: Roboto;
+    color: #ffffff;
+    border-style: double;
 }
 
 .view-items {

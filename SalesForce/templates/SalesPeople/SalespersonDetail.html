@@ -8,7 +8,13 @@
             <h1>{{ sales_person_in_question.first_name }}'s Dashboard</h1>
         </div>
         <div class="div-block">
-            <h1>Sales</h1>
+            <h1>Opportunities
+                <div class="div-block-header-button">
+                    <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewSales">
+                        <button class="div-block-button" type="submit">View Opportunities</button>
+                    </form>
+                </div>
+            </h1>
             {% if recent_sales %}
                 <h4>Completed Sale Count: {{ completed_sales_count }}</h4>
                 <h4>Pending Sale Count: {{ pending_sales_count }}</h4>
@@ -37,7 +43,13 @@
             {% endif %}
         </div>
         <div class='div-block'>
-            <h1>Meetings:</h1>
+            <h1>Meetings
+                <div class="div-block-header-button">
+                    <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewMeetings">
+                        <button class="div-block-button" type="submit">View Meetings</button>
+                    </form>
+                </div>
+            </h1>
             {% if upcoming_meetings %}
                 <h4>Upcoming Meetings</h4>
                 <ul>
@@ -49,29 +61,23 @@
                 <h4>No upcoming meetings</h4>
             {% endif %}
         </div>
-            <div>
-                {% if request.user.first_name == sales_person_in_question.first_name %}
-
-                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
-                    <button class="button" type="submit">Add Sale</button>
-                </form>
-                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddMeeting">
-                    <button class="button" type="submit">Add Meeting</button>
-                </form>
-                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompany">
-                    <button class="button" type="submit">Add Company</button>
-                </form>
-                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative">
-                    <button class="button" type="submit">Add Company Representative</button>
-                </form>
-                {% endif %}
-                <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewSales">
-                    <button class="button" type="submit">View My Sales</button>
-                </form>
-                <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewMeetings">
-                    <button class="button" type="submit">View My Meetings</button>
-                </form>
-            </div>
+        {#            <div>#}
+        {#                {% if request.user.first_name == sales_person_in_question.first_name %}#}
+        {##}
+        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">#}
+        {#                    <button class="button" type="submit">Add Sale</button>#}
+        {#                </form>#}
+        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddMeeting">#}
+        {#                    <button class="button" type="submit">Add Meeting</button>#}
+        {#                </form>#}
+        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompany">#}
+        {#                    <button class="button" type="submit">Add Company</button>#}
+        {#                </form>#}
+        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative">#}
+        {#                    <button class="button" type="submit">Add Company Representative</button>#}
+        {#                </form>#}
+        {#                {% endif %}#}
+        {#            </div>#}
 
     {% endblock %}
 {% endif %}
