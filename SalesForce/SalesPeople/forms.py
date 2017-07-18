@@ -2,15 +2,15 @@ from datetime import datetime
 
 from django import forms
 
-from .models import Sale, Meeting, Company, CompanyRepresentative
+from .models import Sale, Activity, Company, CompanyRepresentative
 
 
 class AddSaleForm(forms.ModelForm):
 
     class Meta:
         model = Sale
-        exclude = ['sales_people', 'sale_completed', 'date_acquired']
-        fields = ('company', 'due_date', 'company_rep', 'amount', 'sale_status', 'sale_probability')
+        exclude = ["other_salespeople", 'sale_completed', 'date_acquired']
+        fields = ('company', 'due_date', 'company_rep', "value")
         widgets = {
             'due_date': forms.DateTimeInput(attrs={'class': 'date_picker', 'id': 'my_date'}),
         }
@@ -21,19 +21,18 @@ class AddMeetingForm(forms.ModelForm):
     time = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'time_picker', 'id': 'time_placeholder'}))
 
     class Meta:
-
-        model = Meeting
+        model = Activity
         fields = ['date', 'time', 'company_representative', 'company']
         widgets = {
-            'meeting_date': forms.DateTimeInput(attrs={'class': 'date_picker', 'id': 'my_date'}),
+            "activity_start_date": forms.DateTimeInput(attrs={'class': 'date_picker', 'id': 'my_date'}),
         }
 
     def __init__(self, *args, **kwargs):
         super(AddMeetingForm, self).__init__(*args, **kwargs)
 
         # if kwargs['instance']:
-        #     self.fields['date'].initial = kwargs['instance'].meeting_date.date()
-        #     self.fields['time'].initial = kwargs['instance'].meeting_date.time()
+        #     self.fields['date'].initial = kwargs['instance'].activity_start_date.date()
+        #     self.fields['time'].initial = kwargs['instance'].activity_start_date.time()
 
     def save(self, commit=True):
         model = super(AddMeetingForm, self).save(commit=False)
@@ -60,7 +59,7 @@ class AddCompanyRepresentativeForm(forms.ModelForm):
 class EditSaleForm(forms.ModelForm):
     class Meta:
         model = Sale
-        fields = (['company', 'due_date', 'company_rep', 'sale_completed', 'sale_probability', 'sale_status'])
+        fields = (['company', 'due_date', 'company_rep', 'sale_completed'])
         exclude = ['date_acquired']
         widgets = {
             'due_date': forms.DateTimeInput(attrs={'class': 'date_picker', 'id': 'my_date'}),

@@ -7,7 +7,7 @@
             <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewSales">
                 <button type="submit">View my profile</button>
             </form>
-        {% elif success_type == "Meeting" %}
+        {% elif success_type == "Activity" %}
             <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewMeetings">
                 <button type="submit">View my Meetings</button>
             </form>

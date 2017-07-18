@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.views.generic.edit import UpdateView, DeleteView
 
 from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
-from .models import SalesPerson, Sale, Meeting
+from .models import SalesPerson, Sale, Activity
 
 
 # Create your views here.
@@ -65,7 +65,7 @@ def add_sale(request, first_name):
             post.sale_completed = False
             post.date_acquired = timezone.now().date()
             post.save()
-            post.quote_number = "MPT%a" % post.id
+            post.quote_number = "MPT%d" % post.id
             post.sales_people.add(request.user)
             post.sync_sale_add()
             post.save()
@@ -92,7 +92,7 @@ def add_meeting(request, first_name):
             post.sales_person = request.user
             post.proactive = True
             post.save()
-            success_type = "Meeting"
+            success_type = "Activity"
             context = {'success_type': success_type}
             return render(request, 'SalesPeople/SuccessfullyAdded.html', context)
         else:
@@ -222,24 +222,24 @@ class UpdateSale(UpdateView):
 
 
 class UpdateMeeting(UpdateView):
-    model = Meeting
-    fields = ['meeting_date', 'company_representative', 'company', 'attended']
+    model = Activity
+    fields = ['activity_start_date', 'company_representative', 'company', 'attended']
     exclude = ['proactive']
     template_name_suffix = 'Edit'
 
     def form_valid(self, form):
         form.save()
-        success_type = "Meeting"
+        success_type = "Activity"
         context = {'success_type': success_type}
         return render(self.request, 'SalesPeople/SuccessfullyEdited.html', context)
 
 
 class DeleteMeeting(DeleteView):
-    model = Meeting
+    model = Activity
     template_name_suffix = "Delete"
 
     def get_success_url(self):
-        return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Meeting"})
+        return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Activity"})
 
 
 class DeleteSale(DeleteView):
