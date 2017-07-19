@@ -17,7 +17,7 @@ class SalesPerson(models.Model):
     pending_sales_amount = models.FloatField(default=0)
     total_sales_count = models.IntegerField(default=0)
     pending_sales_count = models.IntegerField(default=0)
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         return str(self.user.first_name)
@@ -46,7 +46,7 @@ class Company(models.Model):
     sales_representative = models.ManyToManyField(User)
     address = models.CharField(max_length=20)
     qualified = models.BooleanField('Qualified', default=False)
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         return self.company_name
@@ -69,7 +69,8 @@ class Activity(models.Model):
 
     activity_type_choices = (
         (attempting_connection, "Making contact"),
-        (attempting_qualification, "Establishing sale potential"),
+        (attempting_qualification,
+         "Establishing sale poSalesTeam.objects.filter(team_leader=users_salesperson.id)tential"),
         (attempting_sale, "Trying to make a sale"),
     )
 
@@ -91,7 +92,7 @@ class Activity(models.Model):
     completed = models.BooleanField('Submitted completed', default=False)
     verified_completed = models.BooleanField('Verified complete by team leader', default=False)
 
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         return_val = "%s: %s (%s)" % (self.company.company_name, self.title, self.activity_type)
@@ -141,12 +142,12 @@ class Sale(models.Model):
     meetings = models.ManyToManyField(Activity, blank=True)
 
     prime_salesperson = models.ForeignKey(User, related_name='prime_salesperson', null=True)
-    other_salespeople = models.ManyToManyField(User, related_name='secondary_salespeople')
+    other_salespeople = models.ManyToManyField(User, related_name='secondary_salespeople', blank=True)
 
     company_rep = models.ForeignKey(CompanyRepresentative, blank=True, null=True)
     company = models.ForeignKey(Company, null=True, blank=True)
 
-    consulting_company = models.ManyToManyField(Company, related_name="consultant_company")
+    consulting_company = models.ManyToManyField(Company, related_name="consultant_company", blank=True)
     consultant = models.ManyToManyField(CompanyRepresentative, related_name="consultant", blank=True)
 
     unique_id = models.CharField('Optional unique reminder', blank=True, null=True, max_length=20)
@@ -154,7 +155,7 @@ class Sale(models.Model):
 
     quote_number = models.CharField('Quote Number', default="MPT", max_length=10)
 
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         company_name = (Company.objects.get(id=self.company_id)).company_name
@@ -187,9 +188,9 @@ class SalesTeam(models.Model):
     team_leader = models.ForeignKey(User, name='Team Leader', null=True, related_name="team_leader_user")
     team_members = models.ManyToManyField(User, name='Team members', related_name="team_member_users")
     branch_name = models.CharField('Branch name', null=True, max_length=30)
-    team_sales = models.ManyToManyField(Sale, name="Team Sales")
+    team_sales = models.ManyToManyField(Sale, name="Team Sales", blank=True)
 
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         return "%s team" % self.branch_name
@@ -204,7 +205,7 @@ class Goal(models.Model):
     goal_title = models.CharField(max_length=64, name="Goal title", default="Make a million dollars")
     goal_description = models.CharField(max_length=256, name='Goal description', default="Self-explanatory")
 
-    date_added = models.DateTimeField(name="Date added", auto_now_add=True, editable=False)
+    date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 
     def __str__(self):
         return self.goal_title

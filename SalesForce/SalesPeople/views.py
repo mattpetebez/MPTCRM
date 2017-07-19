@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 # from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -13,7 +14,7 @@ from django.utils import timezone
 from django.views.generic.edit import UpdateView, DeleteView
 
 from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
-from .models import SalesPerson, Sale, Activity
+from .models import SalesPerson, Sale, Activity, SalesTeam
 
 
 # Create your views here.
@@ -21,6 +22,20 @@ from .models import SalesPerson, Sale, Activity
 
 def index(request):
     if request.user.is_authenticated():
+        users_salesperson = SalesPerson.objects.get(user=request.user)
+        if request.user.is_superuser:
+            teams = SalesTeam.objects.all()
+            context = {'teams': teams}
+            return render(request, 'SalesPeople/AdminViews/ViewTeams.html', context)
+
+        elif users_salesperson.team_leader:
+            team = SalesTeam.objects.filter(team_leader=users_salesperson)
+            team_members = team.team_member_users.all()
+
+            context = {'team': team, 'team_leader': users_salesperson, 'team_members': team_members}
+
+            return render(request, 'SalesPeople/TeamLeaderViews/ViewMyTeam.html', context)
+
         sales_person_list = User.objects.all().order_by('first_name')
         context = {'sales_person_list': sales_person_list}
         return render(request, 'SalesPeople/index.html', context)
@@ -154,9 +169,14 @@ def show_sales(request, first_name):
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
         sales_person_in_question = SalesPerson.objects.get(user=user_in_question)
-
-        completed_sales = user_in_question.sale_set.filter(sale_completed=True).order_by('due_date')[:5]
-        pending_sales = (user_in_question.sale_set.filter(sale_completed=False)).order_by('due_date')[:5]
+        completed_sales = Sale.objects.filter((Q(prime_salesperson=user_in_question) |
+                                               Q(other_salespeople=user_in_question)) and
+                                              Q(sale_completed=True))[:5]
+        pending_sales = Sale.objects.filter(
+            (Q(prime_salesperson=sales_person_in_question) | Q(other_salespeople=sales_person_in_question))
+            and Q(sale_completed=False))[:5]
+        # completed_sales = user_in_question.sale_set.filter(sale_completed=True).order_by('due_date')[:5]
+        # pending_sales = (user_in_question.sale_set.filter(sale_completed=False)).order_by('due_date')[:5]
         context = ({'completed_sales': completed_sales, 'pending_sales': pending_sales,
                     'sales_person': sales_person_in_question, 'user_in_question': user_in_question})
         return render(request, 'SalesPeople/ViewSales.html', context)
@@ -172,7 +192,7 @@ def view_pending_sales(request, first_name):
         pending_sales = user_in_question.sale_set.filter(sale_completed=False).order_by('due_date')
         context = ({'pending_sales': pending_sales, 'sales_person': sales_person,
                     'user_in_question': user_in_question})
-        return render(request, 'SalesPeople/ViewDetailSales.htmlSales.html', context)
+        return render(request, 'SalesPeople/ViewDetailSales.html', context)
     else:
         return HttpResponse("What the fuck is going on")
 

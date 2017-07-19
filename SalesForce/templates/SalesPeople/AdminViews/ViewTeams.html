@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="div-header">
+        <h1>Sales Teams</h1>
+    </div>
+    <div class="section-header-and-button">
+        <h1>Current Teams</h1>
+        <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddTeam">
+            <button type="submit">Add Team</button>
+        </form>
+    </div>
+    <div class="div-block">
+
+        {% if teams %}
+            <div class="view-items">
+                {% for team in teams %}
+                    <ul>
+                        <li><strong>{{ team.branch_name }}</strong>
+                            <div class="button-container-outer">
+                                <div class="button-container-inner">
+                                    <form method="get" action="/SalesPeople/ViewTeam/{{ team.id }}">
+                                        <button class="view-edit-button" type="submit">View</button>
+                                    </form>
+                                </div>
+                                <div class="button-container-inner">
+                                    <form method="get" action="/SalesPeople/EditTeam/{{ team.id }}">
+                                        <button class="view-edit-button" type="submit">Edit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h4>No teams to display</h4>
+        {% endif %}
+    </div>
+{% endblock %}
