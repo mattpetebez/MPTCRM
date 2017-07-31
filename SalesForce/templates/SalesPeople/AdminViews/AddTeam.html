@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add Team</h1>
+
+<form method="POST" class="post-form">{% csrf_token %}
+<div class="div-block">
+{#    <p><label for="id_branch_name">Branch Name</label></p>#}
+    <h1>Branch Name</h1>
+    <input type="text" name="branch_name" id="id_branch_name" maxlength="30" required/>
+    <h1>Select Team Leader</h1>
+
+    <select name="team_leader" id="id_team_leader" required>
+        <option value="" selected>---------</option>
+        {% for person in possible_members %}
+            <option value="{{ person.id }}">{{ person.first_name }}</option>
+        {% endfor %}
+    </select>
+
+    <h2>Select Team Members</h2>
+    <select name="team_members" multiple="multiple" id="id_team_members">
+        <option value="" selected>---------</option>
+        {% for person in possible_members %}
+        <option value="{{ person.id }}">{{ person.first_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="save btn btn-default">Save</button>
+</div>
+</form>
+{% endblock %}

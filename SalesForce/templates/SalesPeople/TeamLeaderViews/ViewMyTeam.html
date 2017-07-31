@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="div-header">
+{% if team_leader.0.first_name == request.user.first_name %}
+    <h1>Your Team</h1>
+{% elif request.user.is_superuser %}
+    <h1>{{ team_leader.0.first_name}}'s Team</h1>
+{% endif %}
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import forms
 
-from .models import Sale, Activity, Company, CompanyRepresentative
+from .models import Sale, Activity, Company, CompanyRepresentative, SalesTeam
 
 
 class AddSaleForm(forms.ModelForm):
@@ -30,10 +30,6 @@ class AddMeetingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddMeetingForm, self).__init__(*args, **kwargs)
 
-        # if kwargs['instance']:
-        #     self.fields['date'].initial = kwargs['instance'].activity_start_date.date()
-        #     self.fields['time'].initial = kwargs['instance'].activity_start_date.time()
-
     def save(self, commit=True):
         model = super(AddMeetingForm, self).save(commit=False)
         model.meeting_date = datetime.combine(self.cleaned_data['date'], self.cleaned_data['time'])
@@ -60,7 +56,14 @@ class EditSaleForm(forms.ModelForm):
     class Meta:
         model = Sale
         fields = (['company', 'due_date', 'company_rep', 'sale_completed'])
-        exclude = ['date_acquired']
+        exclude = ['date_added']
         widgets = {
             'due_date': forms.DateTimeInput(attrs={'class': 'date_picker', 'id': 'my_date'}),
         }
+
+
+class AddTeamForm(forms.ModelForm):
+    class Meta:
+        model = SalesTeam
+        fields = (['team_leader', 'team_members', 'branch_name'])
+        exclude = ['date_added']

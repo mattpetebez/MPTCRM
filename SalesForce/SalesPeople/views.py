@@ -13,11 +13,31 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic.edit import UpdateView, DeleteView
 
-from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm
+from .forms import AddSaleForm, AddMeetingForm, AddCompanyForm, AddCompanyRepresentativeForm, AddTeamForm
 from .models import SalesPerson, Sale, Activity, SalesTeam
 
 
 # Create your views here.
+
+def view_team(request, pk):
+
+    team = SalesTeam.objects.get(id=pk)
+    team_members = team.team_members.all()
+    team_member_profiles = []
+    for person in team_members:
+        temp = (person, person.salesperson)
+        team_member_profiles.append(temp)
+
+    team_leader = (team.team_leader, team.team_leader.salesperson)
+
+    if request.user.is_superuser or request.user.id == team.team_leader_id:
+
+        context = {'team_leader': team_leader, 'team_members': team_member_profiles,
+                   'team_sales': team.team_sales.order_by('date_added')[:5]}
+        return render(request, 'SalesPeople/TeamLeaderViews/ViewMyTeam.html', context)
+    else:
+        return HttpResponse("Only the team leader, %s, or administrator can view this team."
+                            % team.team_leader.first_name)
 
 
 def index(request):
@@ -29,16 +49,9 @@ def index(request):
             return render(request, 'SalesPeople/AdminViews/ViewTeams.html', context)
 
         elif users_salesperson.team_leader:
-            team = SalesTeam.objects.filter(team_leader=users_salesperson)
-            team_members = team.team_member_users.all()
-
-            context = {'team': team, 'team_leader': users_salesperson, 'team_members': team_members}
-
-            return render(request, 'SalesPeople/TeamLeaderViews/ViewMyTeam.html', context)
-
-        sales_person_list = User.objects.all().order_by('first_name')
-        context = {'sales_person_list': sales_person_list}
-        return render(request, 'SalesPeople/index.html', context)
+            return view_team(request, request.user.team_leader_user.get().id)
+        else:
+              return redirect('%s/' % request.user.first_name)
     else:
         return redirect('login')
 
@@ -49,13 +62,16 @@ def get_sales_person(request, first_name):
             sales_person_in_question = User.objects.get(first_name=first_name)
         except SalesPerson.DoesNotExist:
             raise Http404("Sales person does not exist")
-        completed_sales_count = len(sales_person_in_question.sale_set.filter(sale_completed=True))
-        pending_sales_count = len(sales_person_in_question.sale_set.filter(sale_completed=False))
-        upcoming_meetings = (sales_person_in_question.meeting_set.filter(meeting_date__lte=datetime.now()
-                                                                                           + timedelta(days=10)))
-        a_month_ago = datetime.now() - timedelta(days=30)
-        recent_sales = (sales_person_in_question.sale_set.filter(date_acquired__gte=a_month_ago)
-                        .order_by('date_acquired')[:5])
+        completed_sales_count = (len(sales_person_in_question.prime_salesperson.filter(sale_completed=True))
+                                 + len(sales_person_in_question.secondary_salespeople.filter(sale_completed=True)))
+
+        pending_sales_count = (len(sales_person_in_question.prime_salesperson.filter(sale_completed=False))+
+                               len(sales_person_in_question.secondary_salespeople.filter(sale_completed=False)))
+        upcoming_meetings = (sales_person_in_question.activity_set.filter(activity_start_date=datetime.now()
+                             + timedelta(days=10)))
+        # a_month_ago = datetime.now() - timedelta(days=30)
+        recent_sales = (list(sales_person_in_question.prime_salesperson.all()) +
+                        list(sales_person_in_question.secondary_salespeople.all()))[:5]
 
         context = ({'sales_person_in_question': sales_person_in_question,
                     'completed_sales_count': completed_sales_count,
@@ -268,4 +284,29 @@ class DeleteSale(DeleteView):
 
     def get_success_url(self):
         return render(self.request, 'SalesPeople/SuccessfullyDeleted.html', context={'success_type': "Sale"})
+
+
+def add_team(request, first_name):
+    if request.method == "POST":
+        form = AddTeamForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            post.date_added = timezone.now()
+            return render(request, 'SalesPeople/SuccessfullyAdded.html', {'success_type':"Team"})
+        else:
+            messages.error(request, "Error")
+            return render(request, 'SalesPeople/AdminViews/AddTeam.html', {'form':form})
+    else:
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                form = AddTeamForm()
+                potential_users = User.objects.filter(team_member_set=None, team_leader_user=None)
+                committed_users = User.objects.filter(team_member_set__isnull=False, team_leader_user__isnull=False)
+                return render(request, 'SalesPeople/AdminViews/AddTeam.html',
+                              {'form': form, 'possible_members': potential_users, 'already_taken': committed_users})
+            else:
+                return HttpResponse("You are not privileged to add teams. Please contact an administrator to add a team")
+
+
 

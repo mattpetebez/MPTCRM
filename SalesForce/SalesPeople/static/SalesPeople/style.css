@@ -233,3 +233,8 @@ h1 {
     color: #ffffff;
     border-style: double;
 }
+.div-block input {
+    width: 50%;
+    margin-left: 10%;
+    /*padding: 10px 10px 10px 10px;*/
+}

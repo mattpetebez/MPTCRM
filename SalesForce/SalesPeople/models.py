@@ -69,8 +69,7 @@ class Activity(models.Model):
 
     activity_type_choices = (
         (attempting_connection, "Making contact"),
-        (attempting_qualification,
-         "Establishing sale poSalesTeam.objects.filter(team_leader=users_salesperson.id)tential"),
+        (attempting_qualification, "Establishing sale potential"),
         (attempting_sale, "Trying to make a sale"),
     )
 
@@ -185,10 +184,10 @@ class Sale(models.Model):
 
 
 class SalesTeam(models.Model):
-    team_leader = models.ForeignKey(User, name='Team Leader', null=True, related_name="team_leader_user")
-    team_members = models.ManyToManyField(User, name='Team members', related_name="team_member_users")
+    team_leader = models.ForeignKey(User, null=True, related_name="team_leader_user")
+    team_members = models.ManyToManyField(User, blank=True, related_name="team_member_set")
     branch_name = models.CharField('Branch name', null=True, max_length=30)
-    team_sales = models.ManyToManyField(Sale, name="Team Sales", blank=True)
+    team_sales = models.ManyToManyField(Sale, blank=True)
 
     date_added = models.DateTimeField(name="Date added", default=timezone.now, editable=False)
 

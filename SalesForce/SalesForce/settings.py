@@ -16,17 +16,28 @@ LOGIN_REDIRECT_URL = '/SalesPeople'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-b5c3qlmwic1v_$8+hhnuf$1(xu#76w&&!6vjnt=ocpf)q7hm2'
-
+# Development Environment:
+SECRET_KEY = os.environ.get('CRM_SECRET_KEY', '-b5c3qlmwic1v_$8+hhnuf$1(xu#76w&&!6vjnt=ocpf)q7hm2')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SECURE_SSL_REDIRECT = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+os.environ['wsgi.url_scheme'] = 'https'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['172.31.60.10']
-
+DEBUG = False
+ALLOWED_HOSTS = ['172.31.60.10:443']
+# if os.environ.get('CRM_PROD'):
+#     ALLOWED_HOSTS = ['127.0.0.1']
+# else:
+#     ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -38,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SalesPeople.apps.SalespeopleConfig',
-    'datetimewidget',
 ]
 
 MIDDLEWARE = [

@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^(?P<first_name>\w+)/DeleteMeeting/(?P<pk>[\w-]+)$', DeleteMeeting.as_view()),
     url(r'^(?P<first_name>\w+)/ViewPendingSales/', views.view_pending_sales, name='first_name'),
     url(r'^(?P<first_name>\w+)/ViewCompletedSales/', views.view_completed_sales, name='first_name'),
+    url(r'^ViewTeam/(?P<pk>[\w-]+)', views.view_team),
+    url(r'^(?P<first_name>\w+)/AddTeam/', views.add_team),
 ]
