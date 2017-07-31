@@ -37,9 +37,12 @@ SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 os.environ['wsgi.url_scheme'] = 'https'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+# if os.environ.get('DEV_SERVER'):
+#     ALLOWED_HOSTS = ['127.0.0.1']
+# else:
+ALLOWED_HOSTS = ['172.31.60.10:443', '127.0.0.1']
 
 
 # Application definition
