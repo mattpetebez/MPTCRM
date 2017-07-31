@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # Development Environm
 key_path = '/home/matt/Desktop/MPTCRM/MPTCRM.key'
-if os.path.isfile(key_path):
-    with open(key_path) as file:
-        SECRET_KEY = file.read()
-else:
-    SECRET_KEY = 'bacvdsacb7t34236@!#$5dvudygvdyweo0r8t8}]\]['
+# if os.path.isfile(key_path):
+#     with open(key_path) as file:
+#         SECRET_KEY = file.read()
+# else:
+SECRET_KEY = 'bacvdsacb7t34236@!#$5dvudygvdyweo0r8t8}]\]['
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
@@ -42,7 +42,7 @@ DEBUG = False
 # if os.environ.get('DEV_SERVER'):
 #     ALLOWED_HOSTS = ['127.0.0.1']
 # else:
-ALLOWED_HOSTS = ['172.31.60.10:443', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '172.31.60.10']
 
 
 # Application definition
