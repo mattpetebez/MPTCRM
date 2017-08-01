@@ -12,8 +12,8 @@ import sys
 
 
 ##########################################################################
-sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce')
-sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce/lib/site-packages')
+#sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce')
+#sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce/lib/site-packages')
 ##########################################################################
 
 from django.core.wsgi import get_wsgi_application
