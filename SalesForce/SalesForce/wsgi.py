@@ -8,13 +8,6 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
-import sys
-
-
-##########################################################################
-#sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce')
-#sys.path.append('/home/matt/Desktop/MPTCRM/SalesForce/lib/site-packages')
-##########################################################################
 
 from django.core.wsgi import get_wsgi_application
 #os.environ['HTTPS'] = "on"

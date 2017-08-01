@@ -11,7 +11,7 @@
     <div class="page-header">
         <h1><a href="/">MPT SalesTracker</a></h1>
         <div class="page-header-links">
-            <p>Welcome, {{ request.user.first_name }}.</p>
+            <p>Welcome{% if request.user.first_name %}, {{ request.user.first_name }}{% endif %}.</p>
             <a href="/SalesPeople/{{ request.user.first_name }}">My Dashboard/</a>
             <a href="/SalesPeople/{{ request.user.first_name }}/ViewSales/">View My Sales/</a>
             <a href="/logout">Log out</a>

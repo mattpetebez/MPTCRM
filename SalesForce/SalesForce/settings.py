@@ -28,16 +28,19 @@ key_path = '/home/matt/Desktop/MPTCRM/MPTCRM.key'
 #         SECRET_KEY = file.read()
 # else:
 SECRET_KEY = 'bacvdsacb7t34236@!#$5dvudygvdyweo0r8t8}]\]['
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SECURE_SSL_REDIRECT = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-os.environ['wsgi.url_scheme'] = 'https'
+if os.environ.get('PROD_ENV'):
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+    SECURE_SSL_REDIRECT = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    os.environ['wsgi.url_scheme'] = 'https'
+    DEBUG = False
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+else:
+    DEBUG = True
 
 # if os.environ.get('DEV_SERVER'):
 #     ALLOWED_HOSTS = ['127.0.0.1']
