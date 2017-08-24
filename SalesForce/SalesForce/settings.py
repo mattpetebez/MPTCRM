@@ -30,9 +30,6 @@ if os.path.isfile(password_directory):
     with open(password_directory) as file:
         password = file.readline().strip('\n')
 
-
-database_password = str(input('Please enter the database password:\n'))
-email_password = str(input('Please enter the email password:\n'))
 if os.path.isfile(key_path):
     with open(key_path) as file:
         SECRET_KEY = file.read()
