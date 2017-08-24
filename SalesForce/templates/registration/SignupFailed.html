@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup Failed{% endblock %}
+
+{% block content %}
+    {% if success_type == Fail %}
+        <p1> Failed to sign user {{ username }} ({{ first_name }}) up</p1>
+    {% else %}
+        <p1>Successfully signed up user {{ username }} ({{ first_name }})</p1>
+    {% endif %}
+{% endblock %}

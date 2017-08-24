@@ -1,5 +1,5 @@
-<html>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 {% if success_type %}
     <h1> {{ success_type }} Successfully Edited</h1>
     {% if success_type == "Sale" %}
@@ -7,10 +7,13 @@
             <button type="submit">View my sales</button>
         </form>
     {% elif success_type == "Activity" %}
-        <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewMeetings">
+        <form method="get" action="/SalesPeople/{{ user.first_name }}/ViewActivities">
             <button type="submit">View my meetings</button>
+        </form>
+    {% elif success_type == "Team" %}
+        <form method="get" action="/">
+            <button type="submit">View Teams</button>
         </form>
     {% endif %}
 {% endif %}
-</body>
-</html>
+{% endblock %}

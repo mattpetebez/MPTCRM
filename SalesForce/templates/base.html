@@ -11,10 +11,16 @@
     <div class="page-header">
         <h1><a href="/">MPT SalesTracker</a></h1>
         <div class="page-header-links">
-            <p>Welcome{% if request.user.first_name %}, {{ request.user.first_name }}{% endif %}.</p>
-            <a href="/SalesPeople/{{ request.user.first_name }}">My Dashboard/</a>
-            <a href="/SalesPeople/{{ request.user.first_name }}/ViewSales/">View My Sales/</a>
-            <a href="/logout">Log out</a>
+            {% if request.user.is_authenticated %}
+                <p>Welcome {{ request.user.first_name }}.</p>
+                <a href="/SalesPeople/{{ request.user.first_name }}">My Dashboard/</a>
+                <a href="/SalesPeople/{{ request.user.first_name }}/ViewSales/">View My Sales/</a>
+                <a href="/logout">Log out</a>
+                <p><a href="{{ request.user.first_name }}/EditProfile">Edit My Profile</a></p>
+            {% else %}
+                <p><a href="/signup">Register</a></p>
+                <p><a href="/login">Login</a></p>
+            {% endif %}
         </div>
     </div>
     <div class="content container">

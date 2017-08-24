@@ -17,12 +17,18 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-
+from SalesPeople import views as core_views
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/SalesPeople')),
+    url(r'^ResetPassword/$', auth_views.password_reset, name='password_reset'),
+    url(r'^ResetPassword/Done$', auth_views.password_reset_done, name='password_reset_done'),
+    url(r'^ResetPassword/(?P<uidb64>[\w-]+)/(?P<token>[\w-]+)$', auth_views.password_reset_confirm,
+        name='password_reset_confirm'),
+    url(r'^ResetPassword/Complete/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^SalesPeople/', include('SalesPeople.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login', auth_views.login, name='login'),
     url(r'^logout', auth_views.logout, name='logout'),
+    url(r'^signup/$', core_views.signup, name='signup'),
 ]

@@ -32,7 +32,7 @@
                 <ul>
                     {% for sale in recent_sales %}
                         {% if sale.sale_completed %}
-                            <li>Company: {{ sale.company.company_name }}Date completed: {{ sale.due_date }}
+                            <li>Company: {{ sale.company.company_name }} Date completed: {{ sale.due_date }}
                                 {% if sale.unique_id %} {{ sale.unique_id }} {% endif %}
                             </li>
                         {% endif %}
@@ -43,42 +43,43 @@
             {% endif %}
         </div>
         <div class='div-block'>
-            <h1>Meetings
+            <h1>Activities
                 <div class="div-block-header-button">
-                    <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewMeetings">
-                        <button class="div-block-button" type="submit">View Meetings</button>
+                    <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewActivities">
+                        <button class="div-block-button" type="submit">View Activities</button>
                     </form>
                 </div>
             </h1>
-            {% if upcoming_meetings %}
-                <h4>Upcoming Meetings</h4>
+            {% if upcoming_activities %}
+                <h4>Upcoming Activities</h4>
                 <ul>
-                    {% for meeting in upcoming_meetings %}
-                        <li> Company: {{ meeting.company.company_name }} Date: {{ meeting.meeting_date }} </li>
+                    {% for activity in upcoming_activities %}
+                        <li> Company: {{ activity.company.company_name }} Date: {{ activity.activity_start_date }} </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <h4>No upcoming meetings</h4>
+                <h4>No upcoming activities</h4>
             {% endif %}
         </div>
-        {#            <div>#}
-        {#                {% if request.user.first_name == sales_person_in_question.first_name %}#}
-        {##}
-        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">#}
-        {#                    <button class="button" type="submit">Add Sale</button>#}
-        {#                </form>#}
-        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddMeeting">#}
-        {#                    <button class="button" type="submit">Add Activity</button>#}
-        {#                </form>#}
-        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompany">#}
-        {#                    <button class="button" type="submit">Add Company</button>#}
-        {#                </form>#}
-        {#                <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative">#}
-        {#                    <button class="button" type="submit">Add Company Representative</button>#}
-        {#                </form>#}
-        {#                {% endif %}#}
-        {#            </div>#}
-
+                <div class='div-block'>
+            <h1>Goals
+                <div class="div-block-header-button">
+                    <form method="get" action="/SalesPeople/{{ sales_person_in_question.first_name }}/ViewGoals">
+                        <button class="div-block-button" type="submit">View Goals</button>
+                    </form>
+                </div>
+            </h1>
+            {% if current_goals %}
+                <h4>Current Goals</h4>
+                <ul>
+                    {% for goal in current_coals %}
+                        <li> Company: {{ activity.company.company_name }} Date: {{ activity.activity_start_date }} </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h4>No current goals</h4>
+            {% endif %}
+        </div>
     {% endblock %}
 {% endif %}
 

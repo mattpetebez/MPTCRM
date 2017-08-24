@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script lanuage="javascript" type="text/javascript">
+    window.onunload = refreshParent;
+    function refreshParent() {
+        window.opener.location.reload()
+    }
+</script>
+<script lanuage="javascript" type="text/javascript">
+function popitup(url) {
+    window.open(url, '{{ title }}', 'height=800, width=1000')
+}
+</script>
+
+<h1>Add Company</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{% endblock %}

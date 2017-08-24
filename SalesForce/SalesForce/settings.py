@@ -21,13 +21,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Development Environm
+# Development Environment
 key_path = '/home/matt/Desktop/MPTCRM/MPTCRM.key'
-# if os.path.isfile(key_path):
-#     with open(key_path) as file:
-#         SECRET_KEY = file.read()
-# else:
 SECRET_KEY = 'bacvdsacb7t34236@!#$5dvudygvdyweo0r8t8}]\]['
+database_password = str(input('Please enter the database password:\n'))
+email_password = str(input('Please enter the email password:\n'))
+if os.path.isfile(key_path):
+    with open(key_path) as file:
+        SECRET_KEY = file.read()
+
 if os.environ.get('PROD_ENV'):
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -100,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SalesForce',
         'USER': 'root',
-        'PASSWORD': 'Pass!@#$word',
+        'PASSWORD': database_password,
     }
 }
 
@@ -137,8 +139,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+#######################################################################################################################
+# EMAIL SETTINGS
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mptcrmmachine@gmail.com'
+EMAIL_HOST_PASSWORD = email_password
+EMAIL_PORT = 587
+#######################################################################################################################
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -1,5 +1,5 @@
-<html>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 {% if success_type %}
     <h1> {{ success_type }} Successfully Deleted</h1>
     {% if success_type == "Sale" %}
@@ -12,5 +12,4 @@
         </form>
     {% endif %}
 {% endif %}
-</body>
-</html>
+{% endblock %}

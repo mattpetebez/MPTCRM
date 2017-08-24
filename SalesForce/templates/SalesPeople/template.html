@@ -1,14 +1,15 @@
-<html>
-    <head>
-        <script>
-            {% if messages %}
-                {% for message in messages %}
-                    alert(message);
-                {% endfor %}
-            {% endif %}
-        </script>
-    </head>
-    <body>
-        {{form.as_p}}
-    </body>
-</html>
+{% extends 'base.html' %}
+
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            alert(message);
+        {% endfor %}
+    {% endif %}
+</script>
+{% block content %}
+</head>
+<body>
+{{form.as_p}}
+</body>
+{% endblock %}

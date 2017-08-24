@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script lanuage="javascript" type="text/javascript">
+    window.onunload = refreshParent;
+    function refreshParent() {
+        window.opener.location.reload()
+    }
+</script>
+<script lanuage="javascript" type="text/javascript">
+    function popitup(url, window_name) {
+        window.open(url, window_name, 'height=800, width=1000')
+}
+</script>
+<h1>Add Company Representative</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+{#    {{ form.as_p }}#}
+    <p><label>First Name</label> {{ form.first_name }}</p>
+    <p><label>Last Name</label> {{form.last_name }}</p>
+    <p><label>Contact Number</label> {{ form.contact_number }}</p>
+    <p><label>Company</label> {{ form.company }} <a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompany', 'another_window')">Add Company</a> </p>
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{% endblock %}

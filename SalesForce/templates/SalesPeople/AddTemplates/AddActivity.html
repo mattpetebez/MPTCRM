@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.start_date_picker').datepicker();
+        $('.end_date_picker').datepicker();
+        $('.start_time_picker').timepicker({timeFormat: 'hh:mm:ss'});
+        $('.end_time_picker').timepicker({timeFormat: 'hh:mm:ss'});
+
+    });
+</script>
+
+<script lanuage="javascript" type="text/javascript">
+function popitup(url, window_name) {
+    window_name = window.open(url, '{{ title }}', 'height=800, width=1000')
+}
+</script>
+<h1>Add Activity</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+{#    {{ form.as_p }}#}
+    {% if request.user.is_superuser or request.user.salesperson.team_leader %}
+    <p><label>Activity to be assigned to:</label>{{ form.sales_person }}</p>
+    {% endif %}
+    <p><label>Start day:</label>{{ form.start_date_date}}</p>
+    <p><label>Start time:</label>{{ form.start_date_time }}</p>
+    <p><label>End date:</label>{{ form.end_date_date }}</p>
+    <p><label>End time</label>{{ form.end_date_time }}</p>
+    <p><label>Company</label>{{ form.company }}<small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompany', 'first_window' )">Add Company</a></small></p>
+    <p><label>Company representative</label>{{ form.company_representative }}<small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative', 'second_window')">Add Rep</a> </small></p>
+    <p><label>Consulting Company</label>{{ form.consulting_company }}<small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompany', 'third_window')">Add Consulting Company</a> </small></p>
+    <p><label>Consultant</label>{{ form.consultant }}<small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative', 'fourth_window')">Add Consultant</a> </small></p>
+    <p><label>Related opportunity:</label>{{ form.related_opportunity }}<small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddSale', 'fifth_window')">Add Sale</a> </small></p>
+    <p><label>Task title</label>{{ form.title }}</p>
+    <p><label>Description</label>{{ form.description }}</p>
+    <p><label>Activity goal:</label>{{ form.activity_type }}</p>
+    <p><label>Action</label>{{ form.action }}</p>
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% autoescape off %}
+Hi {{ user.first_name }} {{ user.last_name }}.
+
+We see you have tried to start a CRM account. Welcome to the fucken show.
+
+Please click on the link to confirm your registration,
+
+
+{#http://{{ domain }} {% url 'activate_account' uid token %}#}
+{#http://172.31.60.10:8080/SalesPeople/ActivateAccount/{{ uid }}/{{ token }}#}
+{{ protocol }}://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}
+{% endautoescape %}

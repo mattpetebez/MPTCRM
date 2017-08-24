@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.date_picker').datepicker();
+});
+</script>
+<script lanuage="javascript" type="text/javascript">
+function popitup(url, window_name) {
+    window_name = window.open(url, '{{ title }}', 'height=800, width=1000')
+}
+</script>
+
+<script lanuage="javascript" type="text/javascript">
+    window.onunload = refreshParent;
+    function refreshParent() {
+        window.opener.location.reload()
+    }
+</script>
+<h1>Add Sale</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+{#    {{ form.as_p }}#}
+    <p><label>Other salespeople involved:</label>   {{ form.other_salespeople }}  <small>Please use 'ctrl' button + mouse to select multiple</small></p>
+    <p><label>Type of Sale:</label>{{ form.sale_types }}<a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddSaleType', 'first_window')"><small>Add Sale Type</small></a></p>
+    <p><label>Currency:</label>{{ form.currency }}</p>
+    <p><label>R.O.E</label>{{ form.rate_of_exchange }}</p>
+    <p><label>Date sale is due:</label>{{ form.due_date }}</p>
+    <p><label>Description of sale (optional)</label>{{ form.sale_description }}</p>
+    <p><label>Optional Unique Reminder</label>{{ form.unique_id }}</p>
+    <p><label>Order Value:</label>{{ form.order_value }}</p>
+    <p><label>Quoted Value:</label>{{ form.quoted_value }}</p>
+    <p><label>Margin(%):</label>{{ form.margin }}</p>
+    <p><lable>Sale status</lable>{{ form.status }}</p>
+    <p><label>Sale Probability</label>{{ form.probability }}</p>
+    <p><label>Company Representative</label> {{ form.company_rep }} <small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompanyRepresentative')">Add Rep.</a></small></p>
+    <p><label>Consultant</label> {{ form.consultant }} <small><a onclick="popitup('/SalesPeople/{{ request.user.first_name }}/AddCompany', 'second_window')">Add Consultant</a></small></p>
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+{% endblock %}

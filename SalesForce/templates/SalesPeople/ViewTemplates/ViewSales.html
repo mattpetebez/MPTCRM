@@ -1,36 +1,33 @@
 {% extends 'base.html' %}
 
 {% if user_in_question %}
-    {% block title %}<h1>Lekker</h1>
-    {% endblock %}
     {% block content %}
         <div class="div-header">
             <h1>{{ user_in_question.first_name }}'s Sales</h1>
         </div>
-        <div class="div-block">
-            <h1>Pending Sales
-                <div class="div-block-header-button">
-                    <form method="get" action="/SalesPeople/{{ user_in_question.first_name }}/ViewDetailSales">
-                        <button class="div-block-button" type="submit">View all opportunities</button>
-                    </form>
-                </div>
-            </h1>
 
-            {% if pending_sales %}
-                <h4>Number of opportunities: {{ pending_sales.count }}</h4>
-                <h4>Total opportunities value: R{{ sales_person.pending_sales_amount }}</h4>
-                <ul>
+        <div class="section-header-and-button">
+            <h1>Pending Sales</h1>
+            <form method="get" action="/SalesPeople/{{ user_in_question.first_name }}/ViewDetailSales">
+                <button type="submit">View all opportunities</button>
+            </form>
+        </div>
+        <div class="div-block">
+        {% if pending_sales %}
+            <h4>Number of opportunities: {{ pending_sales.count }}</h4>
+            <h4>Total opportunities value: R{{ sales_person.pending_sales_amount }}</h4>
+                <div class="view-items">
                     {% for sale in pending_sales %}
-                        <div class="view-items">
-                            <li>{{ sale.company.company_name }}, due {{ sale.due_date }} (<strong>Quote
-                                Number: {{ sale.quote_number }}</strong>)
-                                {% if sale.unique_id %} ( Reminder: {{ sale.unique_id }}){% endif %}</li>
+                    <ul>
+                        <li>{{ sale.company.company_name }}, due {{ sale.due_date }} (<strong>Quote
+                            Number: {{ sale.quote_number }}</strong>)
+                            {% if sale.unique_id %} ( Reminder: {{ sale.unique_id }}){% endif %}
                             <div class="button-container-outer">
                                 {% if request.user.first_name == user_in_question.first_name %}
                                     <div class="button-container-inner">
                                         <form method="get"
                                               action="/SalesPeople/{{ user_in_question.first_name }}/EditSale/{{ sale.id }}">
-                                            <button class="div-block-button" type="submit">Edit</button>
+                                            <button class="view-edit-button" type="submit">Edit</button>
                                         </form>
                                     </div>
                                 {% endif %}
@@ -43,33 +40,35 @@
                                     </div>
                                 {% endif %}
                             </div>
-                        </div>
-                    {% endfor %}
-                </ul>
+                        </li>
+                    </ul>
+                {% endfor %}
+                </div>
             {% else %}<h4>No pending sales</h4>{% endif %}
         </div>
-        <div class="div-block">
-            <h1>Completed Sales
+        <div class="section-header-and-button">
+            <h1>Completed Sales</h1>
                 <div class="div-block-header-button">
                     <form method="get" action="/SalesPeople/{{ user_in_question.first_name }}/ViewDetailSales">
-                        <button class="div-block-button" type="submit">View all Sales closed</button>
+                        <button type="submit">View all Sales closed</button>
                     </form>
                 </div>
-            </h1>
+        </div>
+        <div class="div-block">
             <h4>Number of sales made: {{ completed_sales.count }}</h4>
             <h4>Value of sales made: {{ sales_person.total_sales_amount }}</h4>
             {% if completed_sales %}
-                <ul>
+                <div class="view-items">
                     {% for sale in completed_sales %}
-                        <div class="view-items">
-                        <li>Company: {{ sale.company.company_name }}Date completed: {{ sale.due_date }}
-                            {% if sale.unique_id %} {{ sale.unique_id }}{% endif %}</li>
+                    <ul>
+                        <li>Company: {{ sale.company.company_name }}, Date completed: {{ sale.due_date }}
+                            {% if sale.unique_id %} {{ sale.unique_id }}{% endif %}
                             <div class="button-container-outer">
                                 {% if request.user.first_name == user_in_question.first_name %}
                                     <div class="button-container-inner">
                                 <form method="get"
                                       action="/SalesPeople/{{ user_in_question.first_name }}/EditSale/{{ sale.id }}">
-                                    <button class="div-block-button" type="submit">Edit</button>
+                                    <button class="view-edit-button" type="submit">Edit</button>
                                 </form>
                                     </div>
                                 {% endif %}
@@ -82,13 +81,14 @@
                                     </div>
                                 {% endif %}
                             </div>
-                        </div>
+                        </li>
+                    </ul>
                     {% endfor %}
-                </ul>
-            {% else %}
-                <h4>No completed sales</h4>
                 </div>
-            {% endif %}
+            {% else %}
+            <h4>No completed sales</h4>
+        {% endif %}
+        </div>
         {% if request.user.first_name == user_in_question.first_name %}
         <div>
             <form method="get" action="/SalesPeople/{{ request.user.first_name }}/AddSale">
