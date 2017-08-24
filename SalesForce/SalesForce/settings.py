@@ -24,6 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Development Environment
 key_path = '/home/matt/Desktop/MPTCRM/MPTCRM.key'
 SECRET_KEY = 'bacvdsacb7t34236@!#$5dvudygvdyweo0r8t8}]\]['
+password_directory = '/home/matt/password.key'
+password = None
+if os.path.isfile(password_directory):
+    with open(password_directory) as file:
+        password = file.readline().strip('\n')
+
+
 database_password = str(input('Please enter the database password:\n'))
 email_password = str(input('Please enter the email password:\n'))
 if os.path.isfile(key_path):
@@ -102,7 +109,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SalesForce',
         'USER': 'root',
-        'PASSWORD': database_password,
+        'PASSWORD': password,
     }
 }
 
@@ -144,7 +151,7 @@ USE_TZ = True
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'mptcrmmachine@gmail.com'
-EMAIL_HOST_PASSWORD = email_password
+EMAIL_HOST_PASSWORD = password
 EMAIL_PORT = 587
 #######################################################################################################################
 
